@@ -1,2 +1,2 @@
 configuration-service-network/* linguist-vendored
-ledger-client/* linguist-vendored=false
+ledger-client/doc linguist-vendored
