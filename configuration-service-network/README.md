@@ -1,5 +1,5 @@
 ## Start the Hyperledger Fabric Configuration Service Network
-###Network Topology: 1 Org, 4 peers, 1 orderer with 4 [kafka](https://kafka.apache.org/) instances and 3 [Zookeeper](https://zookeeper.apache.org/) instances.
+### Network Topology: 1 Org, 4 peers, 1 orderer with 4 [kafka](https://kafka.apache.org/) instances and 3 [Zookeeper](https://zookeeper.apache.org/) instances.
 * `cd configuration-service-network`
 * `chmod -R +x ./*.sh`
 * `sudo bash startNetwork.sh`
