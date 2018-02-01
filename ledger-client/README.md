@@ -23,14 +23,14 @@ Edit the file `config-network.properties`[*](https://github.com/ascatox/smart-le
 
 	peerOrg1.mspid: Org1MSP
 	peerOrg1.domname: org1.example.com
-	peerOrg1.ca_location: http://localhost:7054
+	peerOrg1.ca_location: http://<your_ip_address>:7054
 	peerOrg1.caName: ca.example.com
-	peerOrg1.peer_locations_0: peer0.org1.example.com@grpc://localhost:7051
-	# peerOrg1.peer_locations_1: peer1.org1.example.com@grpc://localhost:8051
-	peerOrg1.orderer_locations: orderer.example.com@grpc://localhost:7050
-	peerOrg1.eventhub_locations: peer0.org1.example.com@grpc://localhost:7053
+	peerOrg1.peer_locations_0: peer0.org1.example.com@grpc://<your_ip_address>:7051
+	# peerOrg1.peer_locations_1: peer1.org1.example.com@grpc://<your_ip_address>:8051
+	peerOrg1.orderer_locations: orderer.example.com@grpc://<your_ip_address>:7050
+	peerOrg1.eventhub_locations: peer0.org1.example.com@grpc://<your_ip_address>:7053
 
-	integrationtests.tls=null
+	use.tls=null
 	cryptoConfigDir=/crypto-config
 	channelName=mychannel
 
