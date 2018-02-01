@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/DistributedLedger.iml" filepath="$PROJECT_DIR$/.idea/DistributedLedger.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ledger-client/ledgerClient.iml" filepath="$PROJECT_DIR$/ledger-client/ledgerClient.iml" />
-    </modules>
-  </component>
-</project>
