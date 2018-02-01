@@ -422,7 +422,7 @@ public class SmartLedgerClient implements ISmartLedgerClient {
                     "id " +
                     "cannot be empty");
         String[] args = {id};
-        final List<String[]> payloads = SmartLedgerClientHelper.queryChainCode(channel, Q_GET_DCM_BY_ID, args);
+        final List<String[]> payloads = SmartLedgerClientHelper.queryChainCode(channel, Q_GET_DCD_BY_ID, args);
         List<DCD> dcds = Utils.extractDCDFromPayloads(payloads);
         if (dcds.isEmpty()) {
             logger.warn("No DCD retrieved from getDataChannelDescriptor with ID: '" + id + "'");
