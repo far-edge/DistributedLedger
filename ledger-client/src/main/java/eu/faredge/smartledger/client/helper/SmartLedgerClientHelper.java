@@ -50,7 +50,6 @@ public class SmartLedgerClientHelper {
     private static Collection<Orderer> orderers = null;
 
     private static User user = null;
-
     private static User admin = null;
     //private static User peerOrgAdmin = null;
 

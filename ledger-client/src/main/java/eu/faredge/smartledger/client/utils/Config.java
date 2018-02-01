@@ -77,7 +77,7 @@ public class Config {
     private static final Pattern orgPat = Pattern.compile("^" + Pattern.quote(INTEGRATIONTESTS_ORG) + "([^\\.]+)\\" +
             ".mspid$");
 
-    private static final String INTEGRATIONTESTSTLS = PROPBASE + "integrationtests.tls";
+    private static final String INTEGRATIONTESTSTLS = PROPBASE + "use.tls";
     private static Config config;
     private static final Properties sdkProperties = new Properties();
     private boolean runningTLS;

@@ -144,7 +144,7 @@ public class End2EndTestSmartLedgerClientDCM {
         }
     }
 
-    //@Test
+    @Test
     public void testGetCompatibleDSM() {
         try {
             DCM dcm = init();

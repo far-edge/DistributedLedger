@@ -7,8 +7,8 @@ peer chaincode invoke -n smartfactory -c '{"Args":["qGetAllDSMs"]}' -C mychannel
 peer chaincode invoke -n smartfactory -c '{"Args":["qGetAllDCMs"]}' -C mychannel -v x.y
 peer chaincode invoke -n smartfactory -c '{"Args":["qGetAllDCDs"]}' -C mychannel -v x.y
 
-peer chaincode invoke -n smartfactory 
--c '{"Args":["iEditDSM","DSM_ID000","122:455:788","DSD001","{'key':'','value':''}"]}' 
+peer chaincode invoke -n smartfactory
+-c '{"Args":["iEditDSM","DSM_ID000","122:455:788","DSD001","{'key':'','value':''}"]}'
 -C mychannel -v x.y
 
 peer chaincode invoke -n smartfactory -c '{"Args":["qGetAllDSMs"]}' -C mychannel -v x.y
@@ -24,3 +24,5 @@ peer chaincode invoke -n smartfactory
 -C mychannel -v x.y
 
 peer chaincode invoke -n smartfactory -c '{"Args":["qGetAllDCDs"]}' -C mychannel -v x.y
+
+peer chaincode invoke -n smartfactory -c '{"Args":["qGetAllDSMsByDSDs","DSD001","DSD002"]}' -C mychannel -v xx.xx
