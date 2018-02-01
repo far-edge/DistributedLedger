@@ -8,7 +8,7 @@ In order to use the Library, launch Fabric as described in the [official docs](h
 # Install and instantiate the chaincode
 ```bash
 git clone https://github.com/far-edge/DistributedLedger.git && cd ledger-client
-cp -rf /src/main/java/fixture/sdkintegration/gocc/smartfactory/src/github.com/smartfactory/ \ <YOUR_FABRIC_SAMPLES_DIR>/chaincode
+cp -rf /src/main/java/fixture/sdkintegration/gocc/smartfactory/src/github.com/smartfactory/<YOUR_FABRIC_SAMPLES_DIR>/chaincode
 docker exec -it cli bash
 peer chaincode install -p github.com/smartfactory -n smartfactory -v 1.0
 peer chaincode instantiate -n smartfactory -v 1.0 –c '{"Args":[]}' –C mychannel
