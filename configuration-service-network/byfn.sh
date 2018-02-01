@@ -89,7 +89,7 @@ function clearContainers () {
     docker rm -f $CONTAINER_IDS
   fi
   echo "------ Removing database data... ----------"
-  rm -rf ~/data/couchdb/*
+  #rm -rf ~/data/couchdb/*
 }
 
 # Delete any images that were generated as a part of this setup

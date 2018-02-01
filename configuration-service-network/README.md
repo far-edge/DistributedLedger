@@ -1,4 +1,4 @@
-## Start the Hyperledger Fabric Configuration Service Network
+## Start the Hyperledger Fabric Configuration Service Network (1 Org, 4 peers, orderer with 4 kafka)
 
 * `chmod -R +x ./*.sh`
 * `sudo bash startNetwork.sh`
