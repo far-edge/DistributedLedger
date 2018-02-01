@@ -6,7 +6,7 @@ The [Chaincode](https://github.com/ascatox/smart-ledger-client/blob/master/src/m
 # Setup HLF
 In order to use the Library, launch Fabric as described in the [official docs](https://hyperledger-fabric.readthedocs.io/en/latest/) in the section [Writing your First Application](https://hyperledger-fabric.readthedocs.io/en/release/write_first_app.html).<br/>
 # Install and instantiate the chaincode
-`git clone https://github.com/ascatox/smart-ledger-client.git && cd ledger-client`<br/>
+`git clone https://github.com/far-edge/DistributedLedger.git && cd ledger-client`<br/>
 `cp -rf /src/main/java/fixture/sdkintegration/gocc/smartfactory/src/github.com/smartfactory/ \ <YOUR_FABRIC_SAMPLES_DIR>/chaincode`<br/>
 `docker exec -it cli bash`<br/>
 `peer chaincode install -p github.com/smartfactory -n smartfactory -v 1.0`<br/>
