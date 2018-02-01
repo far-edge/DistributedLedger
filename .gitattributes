@@ -1,1 +1,2 @@
-ledger-client/src linguist-vendored
+ledger-client/doc linguist-language=Java
+ledger-client/src linguist-language=Java
