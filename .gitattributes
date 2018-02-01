@@ -1,2 +1,2 @@
-ledger-client/doc/* linguist-language=Java
+ledger-client/doc/* linguist-documentation=true
 ledger-client/src/* linguist-language=Java
