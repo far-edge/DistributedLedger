@@ -11,6 +11,8 @@ In order to use the Library, launch Fabric as described in the [official docs](h
 `docker exec -it cli bash`<br/>
 `peer chaincode install -p github.com/smartfactory -n smartfactory -v 1.0`<br/>
 `peer chaincode instantiate -n smartfactory -v 1.0 –c '{"Args":[]}' –C mychannel `<br/>
+## Alternative solution (use config-service-network [installation guide](https://github.com/far-edge/DistributedLedger/blob/develop/configuration-service-network/README.md))
+
 	
 # Configure the LedgerClient
 Edit the file `config-network.properties`[*](https://github.com/ascatox/smart-ledger-client/blob/master/src/main/resources/config-network.properties) with your favourite text editor in order to configure the network as in your HLF previous installation. Under you can find a complete example of configured file: <br/>
