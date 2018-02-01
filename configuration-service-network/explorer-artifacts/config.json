@@ -1,0 +1,49 @@
+{
+   "network-config": {
+      "org1": {
+         "name": "peerOrg1",
+         "mspid": "Org1MSP",
+         "peer1": {
+            "requests": "grpc://peer0.org1.example.com:7051",
+            "events": "grpc://peer0.org1.example.com:7053",
+            "server-hostname": "peer0.org1.example.com",
+            "tls_cacerts": "/first-network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt"
+         },
+         "peer2": {
+            "requests": "grpc://peer1.org1.example.com:7051",
+            "events": "grpc://peer1.org1.example.com:7053",
+            "server-hostname": "peer1.org1.example.com",
+            "tls_cacerts": "/first-network/crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls/ca.crt"
+         },
+         "peer3": {
+          "requests": "grpc://peer2.org1.example.com:7051",
+          "events": "grpc://peer2.org1.example.com:7053",
+          "server-hostname": "peer2.org1.example.com",
+          "tls_cacerts": "/first-network/crypto-config/peerOrganizations/org1.example.com/peers/peer2.org1.example.com/tls/ca.crt"
+       }, 
+       "peer4": {
+        "requests": "grpc://peer3.org1.example.com:7051",
+        "events": "grpc://peer3.org1.example.com:7053",
+        "server-hostname": "peer3.org1.example.com",
+        "tls_cacerts": "/first-network/crypto-config/peerOrganizations/org1.example.com/peers/peer3.org1.example.com/tls/ca.crt"
+     },
+         "admin": {
+            "key": "/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore",
+            "cert": "/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts"
+         }
+      }
+   },
+   "host":"explorer",
+   "port":"8080",
+   "channel": "businesschannel",
+   "GOPATH":"/opt/gopath",
+   "keyValueStore":"/tmp/fabric-client-kvs",
+   "eventWaitTime":"30000",
+   "mysql":{
+      "host":"mysql",
+      "port":"3306",
+      "database":"fabricexplorer",
+      "username":"root",
+      "passwd":"root"
+   }
+}

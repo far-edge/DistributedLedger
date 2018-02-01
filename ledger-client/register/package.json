@@ -1,0 +1,16 @@
+{
+    "name": "register-users",
+    "version": "1.0.0",
+    "description": "Hyperledger Fabric Register Users via CA Server",
+    "main": "server.js",
+    "dependencies": {
+        "fabric-ca-client": "^1.0.2",
+        "fabric-client": "^1.0.2",
+        "yargs": "^10.0.3"
+    },
+    "license": "Apache-2.0",
+    "keywords": [
+        "Hyperledger",
+        "Fabric"
+    ]
+}

@@ -1,0 +1,7 @@
+eu.faredge.smartledger.client
+eu.faredge.smartledger.client.base
+eu.faredge.smartledger.client.exception
+eu.faredge.smartledger.client.helper
+eu.faredge.smartledger.client.model
+eu.faredge.smartledger.client.model.certificate
+eu.faredge.smartledger.client.utils

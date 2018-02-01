@@ -1,0 +1,26 @@
+peer chaincode install -p github.com/smartfactory -n smartfactory -v x.y
+peer chaincode instantiate -n smartfactory -c '{"Args":["a","10"]}' -C mychannel -v x.y
+-- peer chaincode upgrade -n smartfactory -c '{"Args":["a","10"]}' -C mychannel -v x.y
+-- peer chaincode invoke -n smartfactory -c '{"Args":["a","10"]}' -C mychannel -v x.y
+
+peer chaincode invoke -n smartfactory -c '{"Args":["qGetAllDSMs"]}' -C mychannel -v x.y
+peer chaincode invoke -n smartfactory -c '{"Args":["qGetAllDCMs"]}' -C mychannel -v x.y
+peer chaincode invoke -n smartfactory -c '{"Args":["qGetAllDCDs"]}' -C mychannel -v x.y
+
+peer chaincode invoke -n smartfactory 
+-c '{"Args":["iEditDSM","DSM_ID000","122:455:788","DSD001","{'key':'','value':''}"]}' 
+-C mychannel -v x.y
+
+peer chaincode invoke -n smartfactory -c '{"Args":["qGetAllDSMs"]}' -C mychannel -v x.y
+
+peer chaincode invoke -n smartfactory 
+-c '{"Args":["iEditDCM","DCM_ID000","321:654:987","DSDKeyOne"]}' 
+-C mychannel -v x.y
+
+peer chaincode invoke -n smartfactory -c '{"Args":["qGetAllDCMs"]}' -C mychannel -v x.y
+
+peer chaincode invoke -n smartfactory 
+-c '{"Args":["iEditDCD","2018-12-31","2018-01-01","DSM_666","DCM_069","DCD_id"]}' 
+-C mychannel -v x.y
+
+peer chaincode invoke -n smartfactory -c '{"Args":["qGetAllDCDs"]}' -C mychannel -v x.y
