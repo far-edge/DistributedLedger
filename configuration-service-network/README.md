@@ -1,5 +1,5 @@
 ## Start the Hyperledger Fabric Configuration Service Network (1 Org, 4 peers, orderer with 4 kafka)
-
+* `cd config-service-network`
 * `chmod -R +x ./*.sh`
 * `sudo bash startNetwork.sh`
 * `docker ps -a` Show the network
