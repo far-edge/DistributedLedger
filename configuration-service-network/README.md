@@ -1,6 +1,6 @@
 ## Start the Hyperledger Fabric Configuration Service Network
 ### Prerequisites
-* Access to internet
+* Access to internet.
 * Administrative access to the machine with `sudo`.
 * [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04) correctly installed.
 ### Network Topology:
