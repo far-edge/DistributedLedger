@@ -16,7 +16,7 @@ Point your browser to http://<your_host_address>:8080 to look at [Blockchain Exp
 `sudo bash stopNetwork.sh`
 
 
-## Troubleshooting
+### Troubleshooting
 If you can't copy `the crypto-config` folder, with error `Permission denied`:
 ```bash
 sudo chown -R  $(whoami) crypto-config
