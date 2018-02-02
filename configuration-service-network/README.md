@@ -10,7 +10,7 @@ chmod -R +x ./*.sh
 sudo bash startNetwork.sh
 docker ps -a
 ```
-Point your browser to http://your_host_address:8080 to look at [Blockchain Explorer](https://github.com/hyperledger/blockchain-explorer)
+Point your browser to http://<your_host_address>:8080 to look at [Blockchain Explorer](https://github.com/hyperledger/blockchain-explorer)
 
 ## Stop the Configuration Service Network
 `sudo bash stopNetwork.sh`
