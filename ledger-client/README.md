@@ -35,7 +35,7 @@ Edit the file `config-network.properties`[*](https://github.com/far-edge/Distrib
 	cryptoConfigDir=/crypto-config
 	channelName=mychannel
 
-Copy your HLF `crypto-config` dir under the chosen directory. <br/>
+Copy your HLF `crypto-config` dir under the chosen directory, if you have problems [here](https://github.com/far-edge/DistributedLedger/blob/develop/configuration-service-network/README.md#troubleshooting). <br/>
 `mvn verify` (Launch the integration tests provided). <br/>
 `mvn package && mvn install` (This command creates the jar file, ready to be included in your projects).
 
