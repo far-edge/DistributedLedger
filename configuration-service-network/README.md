@@ -14,7 +14,7 @@ Point your browser to **http://YOUR_HOST_ADDRESS:8080** to look at [Blockchain E
 
 
 ## Troubleshooting
-If you can't copy `the crypto-config` folder for `Permission denied`:
+If you can't copy `the crypto-config` folder, with error `Permission denied`:
 ```bash
 sudo chown -R  $(whoami) crypto-config
 ```
