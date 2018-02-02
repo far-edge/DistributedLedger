@@ -363,7 +363,7 @@ public class SmartLedgerClientHelper {
                         eventHubProperties);
                 newChannel.addEventHub(eventHub);
             }
-
+            //TODO
             /*String chaincodeEventListenerHandle = newChannel.registerChaincodeEventListener(Pattern.compile(".*"),
                     Pattern.compile(Pattern.quote(EXPECTED_EVENT_NAME)),
                     (handle, blockEvent, chaincodeEvent) -> {
@@ -836,7 +836,7 @@ public class SmartLedgerClientHelper {
         }
     }
 
-
+    //TODO
     /*private static void manageChannelEvents(Channel channel) throws SmartLedgerClientException,
             InvalidArgumentException,
             InterruptedException {

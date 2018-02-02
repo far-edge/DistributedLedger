@@ -161,7 +161,7 @@ chaincodeQuery () {
      sleep $DELAY
      echo "Attempting to Query PEER$PEER ...$(($(date +%s)-starttime)) secs"
      peer chaincode query -C $CHANNEL_NAME -n smartfactory -c '{"Args":["qGetAllDSMs"]}' >&log.txt
-     test $? -eq 0 && VALUE=$(cat log.txt | awk '/Query Result/ {print $NF}')
+     test $? -eq 0 && VALUE=$(cat log.txt | awk '/Query Result/ {print $NF}') && let rc=0
      #test "$VALUE" = "$2" && let rc=0
   done
   echo
