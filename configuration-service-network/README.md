@@ -3,6 +3,7 @@
 Administrative access to the machine with `sudo`.
 ### Network Topology:
 1 Org, 4 peers, 1 orderer with 4 [Kafka](https://kafka.apache.org/) instances and 3 [Zookeeper](https://zookeeper.apache.org/) instances.
+## Start the Configuration Service Network
 ```bash
 cd configuration-service-network
 chmod -R +x ./*.sh
