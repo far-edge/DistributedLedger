@@ -1,6 +1,8 @@
 ## Start the Hyperledger Fabric Configuration Service Network
 ### Prerequisites
-Administrative access to the machine with `sudo`.
+* Access to internet
+* Administrative access to the machine with `sudo`.
+* [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04) correctly installed.
 ### Network Topology:
 1 Org, 4 peers, 1 orderer with 4 [Kafka](https://kafka.apache.org/) instances and 3 [Zookeeper](https://zookeeper.apache.org/) instances.
 ## Start the Configuration Service Network
