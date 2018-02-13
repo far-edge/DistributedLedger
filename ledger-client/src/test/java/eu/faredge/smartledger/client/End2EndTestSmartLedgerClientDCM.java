@@ -139,7 +139,6 @@ public class End2EndTestSmartLedgerClientDCM {
         } catch (JsonProcessingException e) {
             assertFalse(e.getMessage(), true);
         } finally {
-            doRemoveDCM(dcmBack);
             doRemoveDCM(dcmBack2);
         }
     }
@@ -147,10 +146,10 @@ public class End2EndTestSmartLedgerClientDCM {
     @Test
     public void testGetCompatibleDSM() {
         try {
-            DCM dcm = init();
+            DCM dcm = doRegisterDCM();
             List<DSM> allDSMs = client.getCompatibleDSM(dcm);
             assertNotNull(allDSMs);
-            assertFalse(allDSMs.isEmpty());
+            assertFalse("Empty Result!", allDSMs.isEmpty());
         } catch (SmartLedgerClientException e) {
             assertFalse(e.getMessage(), true);
         }
@@ -164,13 +163,17 @@ public class End2EndTestSmartLedgerClientDCM {
         dcm.setMacAddress("f8:d8:53:21:32:09:" + Math.abs(random.nextInt(100)));
         DSM dsm = doRegisterDSM();
         dcm.getDataSourceDefinitionsIDs().add(dsm.getDataSourceDefinitionID());
+        DSM dsmOne = doRegisterDSM();
+        dcm.getDataSourceDefinitionsIDs().add(dsmOne.getDataSourceDefinitionID());
         dsmsToRemove.add(dsm);
+        dsmsToRemove.add(dsmOne);
         return dcm;
     }
 
     public static DCM doRegisterDCM() throws SmartLedgerClientException {
         DCM dcm = init();
-        client.registerDCM(dcm);
+        String id = client.registerDCM(dcm);
+        dcm.setId(id);
         return dcm;
     }
 
@@ -184,7 +187,8 @@ public class End2EndTestSmartLedgerClientDCM {
 
     public static DSM doRegisterDSM() throws SmartLedgerClientException {
         DSM dsm = End2EndTestSmartLedgerClientDSM.init();
-        client.registerDSM(dsm);
+        String id = client.registerDSM(dsm);
+        dsm.setId(id);
         return dsm;
     }
 

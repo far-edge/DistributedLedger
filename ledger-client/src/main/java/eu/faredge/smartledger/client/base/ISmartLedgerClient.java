@@ -66,6 +66,17 @@ public interface ISmartLedgerClient {
     DSM getDataSourceManifestByMacAddress(String macAddress) throws SmartLedgerClientException;
 
     /**
+     * This method gives us a DSM object if present in the ledger, it uses the DSD, a unique key of DSM
+     * It gives us an empty object if the object is not present
+     *
+     * @param dsdId
+     * @return
+     * @throws SmartLedgerClientException
+     */
+    DSM getDataSourceManifestByDSD(String dsdId) throws SmartLedgerClientException;
+
+
+    /**
      * This method gives us a DCM object if present in the ledger, it uses the MACAddress, a unique key of DCM
      * It gives us an empty object if the object is not present
      *

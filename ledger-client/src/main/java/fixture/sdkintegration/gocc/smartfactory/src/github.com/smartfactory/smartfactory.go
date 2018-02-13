@@ -232,8 +232,9 @@ func (d *Device) editDSM(APIstub shim.ChaincodeStubInterface, args []string) sc.
 	dsmAsBytes, _ := json.Marshal(dsm)
 	// Id Primary Key is the same, Key and id
 	APIstub.PutState(id, dsmAsBytes)
-
-	return shim.Success(nil)
+	
+	
+	return shim.Success(dsmAsBytes)
 }
 
 /*
@@ -264,7 +265,7 @@ func (d *Device) editDCM(APIstub shim.ChaincodeStubInterface, args []string) sc.
 	// Id Primary Key
 	APIstub.PutState(id, dcmAsBytes)
 
-	return shim.Success(nil)
+	return shim.Success(dcmAsBytes)
 }
 
 /*
@@ -295,7 +296,7 @@ func (d *Device) editDCD(APIstub shim.ChaincodeStubInterface, args []string) sc.
 	// Id Primary Key
 	APIstub.PutState(id, dcdAsBytes)
 
-	return shim.Success(nil)
+	return shim.Success(dcdAsBytes)
 }
 
 /*
@@ -330,6 +331,7 @@ func (d *Device) queryAllDSMsByDSDs(APIstub shim.ChaincodeStubInterface, dsds []
 	}
 	isNotFirstElement := false 
 	var buffer bytes.Buffer
+	buffer.WriteString("[") 	   
 	for i:=0;i<len(dsds);i++ {
 	
 		queryString :=
@@ -343,7 +345,7 @@ func (d *Device) queryAllDSMsByDSDs(APIstub shim.ChaincodeStubInterface, dsds []
 			" }"
 
 		fmt.Println("querDSMByDSDs - queryString:", queryString)
-		
+		fmt.Println("querDSMByDSDs - queryIndex:", i)
 		queryResponse, error := iteratorQueryResultForQueryString(APIstub, queryString)			
 		if error != nil {
 			fmt.Printf("Error querying DSM by DSD: %s", error)
@@ -358,6 +360,7 @@ func (d *Device) queryAllDSMsByDSDs(APIstub shim.ChaincodeStubInterface, dsds []
 		
 		isNotFirstElement = true
 	}
+	buffer.WriteString("]")  
 	return shim.Success(buffer.Bytes())
 	
 }
@@ -686,7 +689,7 @@ func iteratorQueryResultForQueryString(stub shim.ChaincodeStubInterface, querySt
 	}
 	// buffer is a JSON array containing QueryRecords
 	var buffer bytes.Buffer
-	buffer.WriteString("[")
+	/* buffer.WriteString("[") */
 	bArrayMemberAlreadyWritten := false
 	for resultsIterator.HasNext() {
 		queryResponse,
@@ -708,7 +711,7 @@ func iteratorQueryResultForQueryString(stub shim.ChaincodeStubInterface, querySt
 		buffer.WriteString("}")
 		bArrayMemberAlreadyWritten = true
 	}
-	buffer.WriteString("]")
+	/* buffer.WriteString("]") */
 	return buffer.String(),nil
 }
 

@@ -12,6 +12,7 @@ import static org.junit.Assert.assertFalse;
 
 public class End2EndTestInstantiateOrUpgradeChaincode {
 
+    public static final boolean IS_UPGRADE = true;
     static ISmartLedgerClient client = null;
 
     @BeforeClass
@@ -19,7 +20,7 @@ public class End2EndTestInstantiateOrUpgradeChaincode {
         client = new SmartLedgerClient();
         try {
             SmartLedgerClient smartLedgerClient = (SmartLedgerClient) client;
-            smartLedgerClient.instantiateOrUpgradeChaincode(true);
+            smartLedgerClient.instantiateOrUpgradeChaincode(IS_UPGRADE);
         } catch (SmartLedgerClientException e) {
             assertFalse(e.getMessage(), true);
         }

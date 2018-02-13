@@ -108,7 +108,8 @@ public class End2EndTestSmartLedgerClientDCD {
 
     private DCD doRegisterDCD() throws DatatypeConfigurationException, SmartLedgerClientException {
         DCD dcd = init();
-        client.registerDCD(dcd);
+        String id = client.registerDCD(dcd);
+        dcd.setId(id);
         return dcd;
     }
 
@@ -132,7 +133,8 @@ public class End2EndTestSmartLedgerClientDCD {
 
     public static DCM doRegisterDCM() throws SmartLedgerClientException {
         DCM dcm = initDCM();
-        client.registerDCM(dcm);
+        String id = client.registerDCM(dcm);
+        dcm.setId(id);
         return dcm;
     }
 
@@ -146,7 +148,8 @@ public class End2EndTestSmartLedgerClientDCD {
 
     public static DSM doRegisterDSM() throws SmartLedgerClientException {
         DSM dsm = End2EndTestSmartLedgerClientDSM.init();
-        client.registerDSM(dsm);
+        String id = client.registerDSM(dsm);
+        dsm.setId(id);
         return dsm;
     }
 

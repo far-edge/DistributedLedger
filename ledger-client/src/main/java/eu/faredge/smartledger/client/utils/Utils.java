@@ -288,7 +288,7 @@ public class Utils {
                 try {
                     JsonParser parser = new JsonParser();
                     JsonArray recordDCMs = parser.parse(dcmString).getAsJsonArray();
-                    ;
+
                     for (JsonElement recordDCM : recordDCMs) {
                         if (null != recordDCM)
                             dcms.add(RecordDCMParser.parse(recordDCM));

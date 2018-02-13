@@ -69,6 +69,20 @@ public class End2EndTestSmartLedgerClientDSM {
         }
     }
 
+    @Test
+    public void testGetDataSourceManifestByDSD() {
+        DSM dsm = null;
+        try {
+            dsm = doRegisterDSM();
+            DSM dataSourceManifestByDSD = client.getDataSourceManifestByDSD(dsm.getDataSourceDefinitionID());
+            assertNotNull(dataSourceManifestByDSD);
+            assertFalse(StringUtils.isEmpty(dataSourceManifestByDSD.getId()));
+        } catch (SmartLedgerClientException e) {
+            assertFalse(e.getMessage(), true);
+        } finally {
+            doRemoveDSM(dsm);
+        }
+    }
 
     @Test
     public void testGetAllDataSourceManifests() {
@@ -136,7 +150,6 @@ public class End2EndTestSmartLedgerClientDSM {
         } catch (JsonProcessingException e) {
             assertFalse(e.getMessage(), true);
         } finally {
-            doRemoveDSM(dsmBack2);
             doRemoveDSM(dsmBack);
         }
     }
@@ -144,7 +157,7 @@ public class End2EndTestSmartLedgerClientDSM {
     public static DSM init() {
         Random random = new Random();
         DSM dsm = new DSM();
-        dsm.setDataSourceDefinitionID("manifest:dsd:plant_" + Math.abs(random.nextInt(10)));
+        dsm.setDataSourceDefinitionID("manifest_dsd_plant_" + Math.abs(random.nextInt(10)));
         dsm.setId(new String());
         dsm.setMacAddress("b8:e8:56:41:43:06:" + Math.abs(random.nextInt(100)));
         setDataDefinitionParameters(dsm);
@@ -163,7 +176,8 @@ public class End2EndTestSmartLedgerClientDSM {
 
     public static DSM doRegisterDSM() throws SmartLedgerClientException {
         DSM dsm = init();
-        client.registerDSM(dsm);
+        String id = client.registerDSM(dsm);
+        dsm.setId(id);
         return dsm;
     }
 

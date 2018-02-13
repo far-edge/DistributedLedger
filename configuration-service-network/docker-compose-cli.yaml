@@ -263,7 +263,7 @@ services:
       - ./explorer-artifacts/config.json:/blockchain-explorer/config.json
       - ./crypto-config:/blockchain-explorer/first-network/crypto-config
     ports:
-      - "8080:8080"
+      - "8180:8080"
     depends_on:
       - mysql
       - orderer.example.com

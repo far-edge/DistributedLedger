@@ -20,6 +20,7 @@ services:
       - COUCHDB_PASSWORD=faredge
     # Comment/Uncomment the port mapping if you want to hide/expose the CouchDB service,
     # for example map it to utilize Fauxton User Interface in dev environments.
+    # http://<ip_address>:5984/_utils/
     ports:
       - "5984:5984"
     volumes:

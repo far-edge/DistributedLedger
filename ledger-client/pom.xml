@@ -83,11 +83,11 @@
             <artifactId>far-edge.dm.commons</artifactId>
             <version>0.0.1</version>
         </dependency>
-        <!--  <dependency>
+        <!--<dependency>
               <groupId>com.github.far-edge</groupId>
               <artifactId>DigitalModels</artifactId>
-              <version>develop-SNAPSHOT</version>
-          </dependency>-->
+            <version>-SNAPSHOT</version>
+          </dependency> -->
        <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>javax.el</artifactId>

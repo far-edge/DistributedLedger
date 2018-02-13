@@ -172,6 +172,7 @@ public class SmartLedgerClientHelper {
             // Send Query Proposal to all peers
             //
             Utils.out("Now query chaincode for the values rquired.");
+
             QueryByChaincodeRequest queryByChaincodeRequest = client.newQueryProposalRequest();
             queryByChaincodeRequest.setArgs(args);
             queryByChaincodeRequest.setFcn(functionName);
@@ -215,21 +216,22 @@ public class SmartLedgerClientHelper {
         }
     }
 
-    public static CompletableFuture<BlockEvent.TransactionEvent> invokeChaincode(Channel channel, String
+    public static InvokeReturn invokeChaincode(Channel channel, String
             functionName, String[] args)
             throws Exception {
         return invokeChaincode(client, channel, chaincodeID, functionName, args, user);
     }
 
-    private static CompletableFuture<BlockEvent.TransactionEvent> invokeChaincode(HFClient client, Channel channel,
-                                                                                  ChaincodeID chaincodeID,
-                                                                                  String functionName, String[]
+    private static InvokeReturn invokeChaincode(HFClient client, Channel channel,
+                                                ChaincodeID chaincodeID,
+                                                String functionName, String[]
                                                                                           args, org.hyperledger
                                                                                           .fabric.sdk.User user) throws
             SmartLedgerClientException {
         try {
             Collection<ProposalResponse> successful = new LinkedList<>();
             Collection<ProposalResponse> failed = new LinkedList<>();
+            String payload = null;
 
             ///////////////
             /// Send transaction proposal to all peers
@@ -251,6 +253,8 @@ public class SmartLedgerClientHelper {
                     Utils.out("Successful transaction proposal response Txid: %s from peer %s", response
                             .getTransactionID(), response.getPeer().getName());
                     successful.add(response);
+                    payload = response.getProposalResponse().getResponse().getPayload()
+                            .toStringUtf8();
                 } else {
                     failed.add(response);
                 }
@@ -277,9 +281,9 @@ public class SmartLedgerClientHelper {
             // Send transaction to orderer
             Utils.out("Sending chaincode transaction " + functionName + " to orderer.");
             if (user != null) {
-                return channel.sendTransaction(successful, user);
+                return new InvokeReturn(channel.sendTransaction(successful, user) ,payload);
             }
-            return channel.sendTransaction(successful);
+            return new InvokeReturn(channel.sendTransaction(successful), payload);
         } catch (Exception e) {
             logger.error(e);
             throw new SmartLedgerClientException(e);
