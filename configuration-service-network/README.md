@@ -8,7 +8,7 @@
 ## Start the Configuration Service Network
 ```bash
 cd configuration-service-network
-sudo chmod -R +x ./*.sh && sudo chmod +x ./bin/*
+sudo chmod -R +x ./*.sh && sudo chmod +x ./bin/* && sudo chmod +x ./scripts/script.sh
 sudo bash startNetwork.sh
 docker ps -a
 ```
