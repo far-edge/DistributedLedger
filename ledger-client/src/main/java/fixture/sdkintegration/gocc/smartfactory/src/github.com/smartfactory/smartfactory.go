@@ -135,8 +135,8 @@ func (d *Device) Init(APIstub shim.ChaincodeStubInterface) sc.Response {
 	}
 DCDs := []DCD{
 		DCD{
-			ExpirationDateTime:		"2099-12-31",
-			ValidFrom:       		"2000-01-01",
+			ExpirationDateTime:		"12/31/2099 23:59 PM CET",
+			ValidFrom:       		"01/01/2000 00:01 PM CET",
 			DSMId:                  "DSM_",
 			DCMId:					"DCM_",
 			Id:						"",

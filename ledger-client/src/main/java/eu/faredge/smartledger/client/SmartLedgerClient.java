@@ -41,6 +41,7 @@ public class SmartLedgerClient implements ISmartLedgerClient {
     private static final String Q_GET_ALL_DS_MS = "qGetAllDSMs";
     private static final String Q_GET_ALL_DSMS_BY_DSDS = "qGetAllDSMsByDSDs";
     private static final String Q_GET_ALL_DC_MS = "qGetAllDCMs";
+    private static final String Q_GET_ALL_DCD_MS = "qGetAllDCDs";
     private static final String I_EDIT_DCM = "iEditDCM";
     private static final String I_REMOVE_DSM = "iRemoveDSM";
     private static final String I_REMOVE_DCM = "iRemoveDCM";
@@ -255,16 +256,7 @@ public class SmartLedgerClient implements ISmartLedgerClient {
                     "list of dsds  " +
                     "cannot be empty or null");
         String[] args = dcm.getDataSourceDefinitionsIDs().toArray(new String[dcm.getDataSourceDefinitionsIDs().size()]);
-
-        String functionName = Q_GET_ALL_DSMS_BY_DSDS;
-
-        if (args.length==1)
-            functionName = Q_GET_DSM_BY_DSD;
-            /* final List<String[]> payloads = SmartLedgerClientHelper.queryChainCode(channel, Q_GET_ALL_DSMS_BY_DSDS, args);
-            */
-
-
-        final List<String[]> payloads = SmartLedgerClientHelper.queryChainCode(channel, functionName, args);
+        final List<String[]> payloads = SmartLedgerClientHelper.queryChainCode(channel, Q_GET_ALL_DSMS_BY_DSDS, args);
         return Utils.extractDSMFromPayloads(payloads);
     }
 
@@ -278,6 +270,20 @@ public class SmartLedgerClient implements ISmartLedgerClient {
         final List<String[]> payloads = SmartLedgerClientHelper.queryChainCode(channel, Q_GET_ALL_DC_MS, args);
         return Utils.extractDCMFromPayloads(payloads);
     }
+
+
+    /**
+     * @return
+     * @throws Exception
+     */
+
+    @Override
+    public List<DCD> getAllDataChannelDescriptors() throws SmartLedgerClientException {
+        String[] args = {};
+        final List<String[]> payloads = SmartLedgerClientHelper.queryChainCode(channel, Q_GET_ALL_DCD_MS, args);
+        return Utils.extractDCDFromPayloads(payloads);
+    }
+
 
     /**
      * @throws Exception

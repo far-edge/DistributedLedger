@@ -8,6 +8,7 @@ import eu.faredge.dm.dcm.DCM;
 import eu.faredge.dm.dsm.DSM;
 import eu.faredge.smartledger.client.base.ISmartLedgerClient;
 import eu.faredge.smartledger.client.exception.SmartLedgerClientException;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.*;
@@ -40,6 +41,36 @@ public class End2EndTestSmartLedgerClientDCD {
     @AfterClass
     public static void end() {
         client = null;
+    }
+
+    @Test
+    public void testGetDataChannelDescriptorById() {
+        DCD dcd = null;
+        try {
+            dcd = doRegisterDCD();
+            DCD dataChannelDescriptorById = client.getDataChannelDescriptorById(dcd.getId());
+            assertNotNull(dataChannelDescriptorById);
+            assertFalse(StringUtils.isEmpty(dataChannelDescriptorById.getId()));
+        } catch (SmartLedgerClientException e) {
+            assertFalse(e.getMessage(), true);
+        } catch (Exception e) {
+            assertFalse(e.getMessage(), true);
+        } finally {
+            doRemoveDCD(dcd);
+        }
+    }
+
+    @Test
+    public void testGetAllDataChannelDescriptor() {
+        try {
+            /* Decommentare la riga di codice sottostante per ripulire eventuali record con dati incoerenti */
+            /* client.removeDCD("DCD_ba2numu2v2ec8f2o26sg"); */
+            List<DCD> all = client.getAllDataChannelDescriptors();
+            assertNotNull(all);
+            assertFalse(all.isEmpty());
+        } catch (SmartLedgerClientException e) {
+            assertFalse(e.getMessage(), true);
+        }
     }
 
 
@@ -167,9 +198,12 @@ public class End2EndTestSmartLedgerClientDCD {
             for (DCM dcm : dcmsToRemove) {
                 doRemoveDCM(dcm);
             }
+
             for (DSM dsm : dsmsToRemove) {
                 doRemoveDSM(dsm);
             }
+            dcmsToRemove.clear();
+            dsmsToRemove.clear();
         } catch (Exception e) {
             logger.warn("Final DSM Cleaning...\n");
             logger.warn(e);

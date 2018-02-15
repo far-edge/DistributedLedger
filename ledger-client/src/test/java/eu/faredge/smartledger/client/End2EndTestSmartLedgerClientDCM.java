@@ -73,7 +73,7 @@ public class End2EndTestSmartLedgerClientDCM {
         }
     }
 
-    @Test
+       @Test
     public void testGetAllDataConsumerManifests() {
         try {
             List<DCM> all = client.getAllDataConsumerManifests();
@@ -164,7 +164,8 @@ public class End2EndTestSmartLedgerClientDCM {
         DSM dsm = doRegisterDSM();
         dcm.getDataSourceDefinitionsIDs().add(dsm.getDataSourceDefinitionID());
         DSM dsmOne = doRegisterDSM();
-        dcm.getDataSourceDefinitionsIDs().add(dsmOne.getDataSourceDefinitionID());
+    /*    Decommentare per fare test con un DCM con una lista di DSD composta da due elementi (invece di uno soltanto)*/
+    /*    dcm.getDataSourceDefinitionsIDs().add(dsmOne.getDataSourceDefinitionID()); */
         dsmsToRemove.add(dsm);
         dsmsToRemove.add(dsmOne);
         return dcm;
@@ -206,6 +207,7 @@ public class End2EndTestSmartLedgerClientDCM {
             for (DSM dsm : dsmsToRemove) {
                 doRemoveDSM(dsm);
             }
+            dsmsToRemove.clear();
         } catch (Exception e) {
             logger.warn("Final DSM Cleaning...\n");
             logger.warn(e);
