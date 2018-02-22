@@ -11,7 +11,8 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 
 public class End2EndTestInstantiateOrUpgradeChaincode {
-
+/* IS_UPGRADE false => fa una INSTANTIATE nel primo giro dopo la INSTALL */
+/* IS_UPGRADE true  => fa una UPGRADE appunto, dopo eventuali modifiche al chaincode */
     public static final boolean IS_UPGRADE = true;
     static ISmartLedgerClient client = null;
 

@@ -64,7 +64,7 @@ public class End2EndTestSmartLedgerClientDCD {
     public void testGetAllDataChannelDescriptor() {
         try {
             /* Decommentare la riga di codice sottostante per ripulire eventuali record con dati incoerenti */
-            /* client.removeDCD("DCD_ba2numu2v2ec8f2o26sg"); */
+            /* client.removeDCD("DCD_ba39va8g3tenqa4ooqn0"); */
             List<DCD> all = client.getAllDataChannelDescriptors();
             assertNotNull(all);
             assertFalse(all.isEmpty());
