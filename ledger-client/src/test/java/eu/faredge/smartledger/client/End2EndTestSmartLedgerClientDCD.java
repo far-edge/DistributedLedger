@@ -12,10 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.*;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -63,8 +59,6 @@ public class End2EndTestSmartLedgerClientDCD {
     @Test
     public void testGetAllDataChannelDescriptor() {
         try {
-            /* Decommentare la riga di codice sottostante per ripulire eventuali record con dati incoerenti */
-            /* client.removeDCD("DCD_ba39va8g3tenqa4ooqn0"); */
             List<DCD> all = client.getAllDataChannelDescriptors();
             assertNotNull(all);
             assertFalse(all.isEmpty());
