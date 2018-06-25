@@ -62,6 +62,8 @@ setGlobals () {
 }
 
 createChannel() {
+	echo "Waiting for 30 seconds...."
+    sleep 30
 	setGlobals 0
 
   if [ -z "$CORE_PEER_TLS_ENABLED" -o "$CORE_PEER_TLS_ENABLED" = "false" ]; then
@@ -245,5 +247,7 @@ echo "|  _|   |  \| | | | | | "
 echo "| |___  | |\  | | |_| | "
 echo "|_____| |_| \_| |____/  "
 echo
+echo "Press Ctrl-c to exit"
+
 
 exit 0

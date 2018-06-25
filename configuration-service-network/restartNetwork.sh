@@ -1,3 +1,2 @@
 #!/bin/bash
-echo "STOPPING Network!!!!"
-sudo bash stopNetwork.sh && sudo bash doRestartNetwork.sh
+./byfn.sh -m restart -c ledgerchannel -s couchdb

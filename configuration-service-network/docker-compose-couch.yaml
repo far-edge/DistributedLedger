@@ -12,7 +12,7 @@ services:
   
   couchdb0:
     container_name: couchdb0
-    image: hyperledger/fabric-couchdb:x86_64-1.0.5
+    image: hyperledger/fabric-couchdb:x86_64-1.0.6
     # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
     # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
     environment:
@@ -24,7 +24,7 @@ services:
     ports:
       - "5984:5984"
     volumes:
-      - ~/data/couchdb0:/opt/couchdb/data
+      - ./data/couchdb0:/opt/couchdb/data
     networks:
       - byfn
 
@@ -43,7 +43,7 @@ services:
 
   couchdb1:
     container_name: couchdb1
-    image: hyperledger/fabric-couchdb:x86_64-1.0.5
+    image: hyperledger/fabric-couchdb:x86_64-1.0.6
     # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
     # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
     environment:
@@ -54,7 +54,7 @@ services:
     ports:
       - "6984:5984"
     volumes:
-      - ~/data/couchdb1:/opt/couchdb/data
+      - ./data/couchdb1:/opt/couchdb/data
     networks:
       - byfn
 
@@ -74,7 +74,7 @@ services:
 
   couchdb2:
       container_name: couchdb2
-      image: hyperledger/fabric-couchdb:x86_64-1.0.5
+      image: hyperledger/fabric-couchdb:x86_64-1.0.6
       # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
       # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
       environment:
@@ -85,7 +85,7 @@ services:
       ports:
         - "7984:5984"
       volumes:
-        - ~/data/couchdb2:/opt/couchdb/data
+        - ./data/couchdb2:/opt/couchdb/data
       networks:
         - byfn
 
@@ -103,7 +103,7 @@ services:
 
   couchdb3:
       container_name: couchdb3
-      image: hyperledger/fabric-couchdb:x86_64-1.0.5
+      image: hyperledger/fabric-couchdb:x86_64-1.0.6
       # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
       # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
       environment:
@@ -114,7 +114,7 @@ services:
       ports:
         - "8984:5984"
       volumes:
-        - ~/data/couchdb3:/opt/couchdb/data
+        - ./data/couchdb3:/opt/couchdb/data
       networks:
         - byfn
 

@@ -35,7 +35,7 @@
    },
    "host":"explorer",
    "port":"8080",
-   "channel": "businesschannel",
+   "channel": "ledgerchannel",
    "GOPATH":"/opt/gopath",
    "keyValueStore":"/tmp/fabric-client-kvs",
    "eventWaitTime":"30000",

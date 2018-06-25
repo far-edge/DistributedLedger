@@ -15,6 +15,8 @@ services:
     extends:
       file:  base/docker-compose-base.yaml
       service: peer0.org1.example.com
+    environment:
+     - peer-chaincodedev=true
     networks:
       - byfn
 
@@ -43,12 +45,12 @@ services:
       - byfn
 
   ca.example.com:
-    image: hyperledger/fabric-ca:x86_64-1.0.5
+    image: hyperledger/fabric-ca:x86_64-1.1.0
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.example.com
-      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/4239aa0dcd76daeeb8ba0cda701851d14504d31aad1b2ddddbac6a57365e497c_sk
+     # - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem
+     # - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/4239aa0dcd76daeeb8ba0cda701851d14504d31aad1b2ddddbac6a57365e497c_sk
     ports:
       - "7054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
@@ -60,8 +62,9 @@ services:
     networks:
       - byfn
   
+  #TODO Kafka
   kafka0:
-    image: hyperledger/fabric-kafka:x86_64-1.0.5
+    image: hyperledger/fabric-kafka:x86_64-0.4.7
     restart: always
     tty: true
     container_name: kafka0
@@ -73,19 +76,20 @@ services:
       - KAFKA_LOG_RETENTION_MS=-1
       - KAFKA_BROKER_ID=0
       - KAFKA_MIN_INSYNC_REPLICAS=2
-      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=2
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181
+      #,zookeeper1:2181,zookeeper2:2181
     depends_on:
       - zookeeper0
-      - zookeeper1
-      - zookeeper2
+      # - zookeeper1
+      # - zookeeper2
     expose:
       - '9092'
     networks:
       - byfn
 
   kafka1:
-    image: hyperledger/fabric-kafka:x86_64-1.0.5
+    image: hyperledger/fabric-kafka:x86_64-0.4.7
     restart: always
     tty: true
     container_name: kafka1
@@ -97,74 +101,76 @@ services:
       - KAFKA_LOG_RETENTION_MS=-1
       - KAFKA_BROKER_ID=1
       - KAFKA_MIN_INSYNC_REPLICAS=2
-      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=2
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181
+      #,zookeeper1:2181,zookeeper2:2181
     depends_on:
       - zookeeper0
-      - zookeeper1
-      - zookeeper2
+      # - zookeeper1
+      # - zookeeper2
     expose:
       - '9092'
     networks:
       - byfn
 
-  kafka2:
-    image: hyperledger/fabric-kafka:x86_64-1.0.5
-    restart: always
-    tty: true
-    container_name: kafka2
-    hostname: kafka2
-    environment:
-      - KAFKA_MESSAGE_MAX_BYTES=1048576 # 1 * 1024 * 1024 B
-      - KAFKA_REPLICA_FETCH_MAX_BYTES=1048576 # 1 * 1024 * 1024 B
-      - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
-      - KAFKA_LOG_RETENTION_MS=-1
-      - KAFKA_BROKER_ID=2
-      - KAFKA_MIN_INSYNC_REPLICAS=2
-      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
-    depends_on:
-      - zookeeper0
-      - zookeeper1
-      - zookeeper2
-    expose:
-      - '9092'
-    networks:
-      - byfn
+  # kafka2:
+  #   image: hyperledger/fabric-kafka:x86_64-1.0.6
+  #   restart: always
+  #   tty: true
+  #   container_name: kafka2
+  #   hostname: kafka2
+  #   environment:
+  #     - KAFKA_MESSAGE_MAX_BYTES=1048576 # 1 * 1024 * 1024 B
+  #     - KAFKA_REPLICA_FETCH_MAX_BYTES=1048576 # 1 * 1024 * 1024 B
+  #     - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
+  #     - KAFKA_LOG_RETENTION_MS=-1
+  #     - KAFKA_BROKER_ID=2
+  #     - KAFKA_MIN_INSYNC_REPLICAS=2
+  #     - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+  #     - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+  #   depends_on:
+  #     - zookeeper0
+  #     - zookeeper1
+  #     - zookeeper2
+  #   expose:
+  #     - '9092'
+  #   networks:
+  #     - byfn
 
-  kafka3:
-    image: hyperledger/fabric-kafka:x86_64-1.0.5
-    restart: always
-    tty: true
-    container_name: kafka3
-    hostname: kafka3
-    environment:
-      - KAFKA_MESSAGE_MAX_BYTES=1048576 # 1 * 1024 * 1024 B
-      - KAFKA_REPLICA_FETCH_MAX_BYTES=1048576 # 1 * 1024 * 1024 B
-      - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
-      - KAFKA_LOG_RETENTION_MS=-1
-      - KAFKA_BROKER_ID=3
-      - KAFKA_MIN_INSYNC_REPLICAS=2
-      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
-    depends_on:
-      - zookeeper0
-      - zookeeper1
-      - zookeeper2
-    expose:
-      - '9092'
-    networks:
-      - byfn
+  # kafka3:
+  #   image: hyperledger/fabric-kafka:x86_64-1.0.6
+  #   restart: always
+  #   tty: true
+  #   container_name: kafka3
+  #   hostname: kafka3
+  #   environment:
+  #     - KAFKA_MESSAGE_MAX_BYTES=1048576 # 1 * 1024 * 1024 B
+  #     - KAFKA_REPLICA_FETCH_MAX_BYTES=1048576 # 1 * 1024 * 1024 B
+  #     - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
+  #     - KAFKA_LOG_RETENTION_MS=-1
+  #     - KAFKA_BROKER_ID=3
+  #     - KAFKA_MIN_INSYNC_REPLICAS=2
+  #     - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+  #     - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+  #   depends_on:
+  #     - zookeeper0
+  #     - zookeeper1
+  #     - zookeeper2
+  #   expose:
+  #     - '9092'
+  #   networks:
+  #     - byfn
 
   zookeeper0:
-    image: hyperledger/fabric-zookeeper:x86_64-1.0.5
+    image: hyperledger/fabric-zookeeper:x86_64-0.4.7
     restart: always
     tty: true
     container_name: zookeeper0
     hostname: zookeeper0
     environment:
       - ZOO_MY_ID=1
-      - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
+      - ZOO_SERVERS=server.1=zookeeper0:2888:3888
+      # server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
     expose:
       - '2181'
       - '2888'
@@ -172,37 +178,37 @@ services:
     networks:
       - byfn
       
-  zookeeper1:
-    image: hyperledger/fabric-zookeeper:x86_64-1.0.5
-    restart: always
-    tty: true
-    container_name: zookeeper1
-    hostname: zookeeper1
-    environment:
-      - ZOO_MY_ID=2
-      - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
-    expose:
-      - '2181'
-      - '2888'
-      - '3888'
-    networks:
-      - byfn
+  # zookeeper1:
+  #   image: hyperledger/fabric-zookeeper:x86_64-1.0.6
+  #   restart: always
+  #   tty: true
+  #   container_name: zookeeper1
+  #   hostname: zookeeper1
+  #   environment:
+  #     - ZOO_MY_ID=2
+  #     - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
+  #   expose:
+  #     - '2181'
+  #     - '2888'
+  #     - '3888'
+  #   networks:
+  #     - byfn
 
-  zookeeper2:
-    image: hyperledger/fabric-zookeeper:x86_64-1.0.5
-    restart: always
-    tty: true
-    container_name: zookeeper2
-    hostname: zookeeper2
-    environment:
-      - ZOO_MY_ID=3
-      - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
-    expose:
-      - '2181'
-      - '2888'
-      - '3888'
-    networks:
-      - byfn
+  # zookeeper2:
+  #   image: hyperledger/fabric-zookeeper:x86_64-1.0.6
+  #   restart: always
+  #   tty: true
+  #   container_name: zookeeper2
+  #   hostname: zookeeper2
+  #   environment:
+  #     - ZOO_MY_ID=3
+  #     - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
+  #   expose:
+  #     - '2181'
+  #     - '2888'
+  #     - '3888'
+  #   networks:
+  #     - byfn
   
   orderer.example.com:
     extends:
@@ -216,14 +222,14 @@ services:
     depends_on:
       - kafka0
       - kafka1
-      - kafka2
-      - kafka3
+      # - kafka2
+      # - kafka3
     networks:
       - byfn
 
   cli:
     container_name: cli
-    image: hyperledger/fabric-tools:x86_64-1.0.5
+    image: hyperledger/fabric-tools:x86_64-1.1.0
     tty: true
     environment:
       - GOPATH=/opt/gopath
@@ -238,10 +244,11 @@ services:
       - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
       - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
-    command: /bin/bash -c './scripts/script.sh ${CHANNEL_NAME} ${DELAY}; sleep $TIMEOUT'
+    command: /bin/bash -c './scripts/script_reduced.sh ${CHANNEL_NAME} ${DELAY}; sleep infinity' #use $TIMEOUT
     volumes:
         - /var/run/:/host/var/run/
-        - ./../ledger-client/src/main/java/fixture/sdkintegration/gocc/smartfactory/src/github.com/:/opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go
+        - ./chaincode/smartfactory/src/github.com/:/opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go
+        - ./chaincode:/opt/gopath/src/github.com/hyperledger/fabric/chaincode
         - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
         - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
         - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
@@ -289,11 +296,20 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=fabricexplorer
-      - STARTUP_SQL=/fabricexplorer.sql
+      #- STARTUP_SQL=/fabricexplorer.sql
     volumes:
-      - ./explorer-artifacts/fabricexplorer.sql:/docker-entrypoint-initdb.d/fabricexplorer.sql
+      #- ./explorer-artifacts/fabricexplorer.sql:/docker-entrypoint-initdb.d/fabricexplorer.sql
+      - ./data/mysql:/var/lib/mysql
     expose:
       - "3306"
     command: mysqld
     networks:
       - byfn
+  
+  composer: #composer service
+    image: hyperledger/composer-playground:0.19.0-20180323121202
+    container_name: composer-playground
+    ports:
+      - "8080:8080"
+    networks:
+     - byfn

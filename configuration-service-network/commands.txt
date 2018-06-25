@@ -26,3 +26,12 @@ peer chaincode invoke -n smartfactory
 peer chaincode invoke -n smartfactory -c '{"Args":["qGetAllDCDs"]}' -C mychannel -v x.y
 
 peer chaincode invoke -n smartfactory -c '{"Args":["qGetAllDSMsByDSDs","DSD001","DSD002"]}' -C mychannel -v xx.xx
+
+
+
+
+peer chaincode install -p product-unit-hub-chaincode -n productunithub -v 1.0 -l Node
+peer chaincode instantiate  -n productunithub -v 1.0 -l Node -C ledgerchannel -c '{"Args":["init","a","100","b","200"]}'
+
+
+peer chaincode invoke -n productunithub -c '{"Args":["getProcessStep","A819631","CAB","TCAB","CTPP-01A"]}' -C ledgerchannel
