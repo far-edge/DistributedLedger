@@ -1,0 +1,35 @@
+{
+  "name": "secure-state-sharing",
+  "version": "1.0.0",
+  "description": "Secure state sharing",
+  "main": "src/server.js",
+  "test": "test/test.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "start-dev": "nodemon src/server.js",
+    "test": "node_modules/.bin/mocha -w",
+    "doc": "nodedoc src",
+    "docker": "cd docker && mkdir app && cp -r ../src/* app && cp ../package.json app && ./dockerize.sh 1.0.0 && rm -rf app"
+  },
+  "author": "Antonio Scatoloni",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "express": "^4.16.3",
+    "express-http-proxy": "^1.4.0",
+    "ngsijs": "^1.1.1",
+    "node-ledger-client": "^1.1.14",
+    "winston": "^3.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.2.0",
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^5.2.0",
+    "node-doc": "^0.1.5",
+    "nodemon": "^1.18.6",
+    "npx": "^10.2.0"
+  }
+}

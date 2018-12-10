@@ -1,0 +1,59 @@
+version: '2'
+services:
+   # orion
+  mongo:  
+   image: mongo:3.4
+   command: --nojournal
+   volumes:
+     - ./data/mongo/data/0:/data/db
+  
+  orion:
+   image: fiware/orion:2.0.0
+   depends_on:
+    - mongo
+   ports: 
+    - "1026:1026"
+   #environment:
+   command:  -dbhost mongo
+  
+  secure-state-sharing:
+     image: faredge/secure-state-sharing:1.0.0
+    #  environment:
+    #   - LOGGING_LEVEL = debug
+    #   - DEVELOPMENT = false
+     depends_on:
+        - orion
+     ports: 
+      - "3026:3026"
+     volumes:
+      - /opt/hyperledger/secure-state-sharing/secure-state-sharing/resources:/usr/app/resources
+      - /opt/hyperledger/fabric1.3/configuration-network-fabric/crypto-config:/usr/app/crypto-config
+
+
+  mongo_1:  
+   image: mongo:3.4
+   command: --nojournal
+   volumes:
+     - ./data/mongo/data/1:/data/db
+  
+  orion_1:
+   image: fiware/orion:2.0.0
+   depends_on:
+    - mongo_1
+   ports: 
+    - "2026:1026"
+   #environment:
+   command:  -dbhost mongo_1
+  
+  secure-state-sharing_1:
+     image: faredge/secure-state-sharing:1.0.0
+    #  environment:
+    #   - LOGGING_LEVEL = debug
+    #   - DEVELOPMENT = false
+     depends_on:
+        - orion_1
+     ports: 
+      - "4026:3026"
+     volumes:
+      - /opt/hyperledger/secure-state-sharing/secure-state-sharing_1/resources:/usr/app/resources
+      - /opt/hyperledger/fabric1.3/configuration-network-fabric/crypto-config:/usr/app/crypto-config

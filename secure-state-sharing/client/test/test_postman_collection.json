@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "4c15be40-8b2e-4958-b096-5389ac1fa468",
+		"name": "SSS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3026/v2/entities",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Fiware-Service",
+						"value": "testService",
+						"disabled": true
+					},
+					{
+						"key": "Fiware-ServicePath",
+						"value": "/testSubService",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"Room777\",\n  \"type\": \"Room\",\n  \"temperature\": {\n    \"value\": 23,\n    \"type\": \"Float\"\n  },\n  \"pressure\": {\n    \"value\": 720,\n    \"type\": \"Integer\"\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3026/v2/entities",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3026",
+					"path": [
+						"v2",
+						"entities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3026/v2/entities/Room777/attrs/pressure?type=Room",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Fiware-Service",
+						"value": "testService",
+						"disabled": true
+					},
+					{
+						"key": "Fiware-ServicePath",
+						"value": "/testSubService",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"value\": \"Pippi\"\n \n}"
+				},
+				"url": {
+					"raw": "http://localhost:3026/v2/entities/Room777/attrs/pressure?type=Room",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3026",
+					"path": [
+						"v2",
+						"entities",
+						"Room777",
+						"attrs",
+						"pressure"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "Room"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3026/v2/entities/Room999/attrs/pressure?type=Room",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Fiware-Service",
+						"value": "testService",
+						"disabled": true
+					},
+					{
+						"key": "Fiware-ServicePath",
+						"value": "/testSubService",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"type\": \"Testo\"\n \n}"
+				},
+				"url": {
+					"raw": "http://localhost:3026/v2/entities/Room999/attrs/pressure?type=Room",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3026",
+					"path": [
+						"v2",
+						"entities",
+						"Room999",
+						"attrs",
+						"pressure"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "Room"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3026/v2/entities/",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Fiware-Service",
+						"value": "testService",
+						"disabled": true
+					},
+					{
+						"key": "Fiware-ServicePath",
+						"value": "/testSubService",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n{\n  \"ambientNoise\": {\n    \"value\": 31.5\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:1026/v2/entities/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"v2",
+						"entities",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
