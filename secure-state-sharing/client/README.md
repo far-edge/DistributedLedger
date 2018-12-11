@@ -29,5 +29,5 @@ In order to innstall the Secure State Sharing as Multi client installation (Two 
 * You have now two different installations working, composed by the two clients and two different OCBs.
 
 ## Usage
-In order to use the Secure State Sharing please refer to the [NGSI v2 APIs](http://telefonicaid.github.io/fiware-orion/api/v2/stable/l).
+In order to use the Secure State Sharing please refer to the [NGSI v2 APIs](http://telefonicaid.github.io/fiware-orion/api/v2/stable).
 The service is available at the choosen PORT (default 3026) in `config.json` file.
