@@ -6,7 +6,7 @@
 * Administrative access to the machine.
 * Access to Internet.
 * [Node](https://nodejs.org/en/download/) and npm correctly installed (version 8.x or greater)
-* Install Hyperledger Fabric version 1.3 following this installation [guide](https://hyperledger-fabric.readthedocs.io/en/release-1.3/getting_started.html). Copy the `crypto-config` dir in local path accessible for the client.
+* Install **Hyperledger Fabric version 1.3** following this installation [guide](https://hyperledger-fabric.readthedocs.io/en/release-1.3/getting_started.html). Copy the `crypto-config` dir in local path accessible for the client.
 * Clone the repository: `git clone https://github.com/far-edge/DistributedLedger.git && cd secure-state-sharing`
 * [Install the Chaincode](https://github.com/far-edge/DistributedLedger/tree/develop/secure-state-sharing/chaincode) in your Fabric installation.
 
