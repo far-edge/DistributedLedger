@@ -11,7 +11,7 @@
 * [Install the Chaincode](https://github.com/far-edge/DistributedLedger/tree/develop/secure-state-sharing/chaincode) in your Fabric installation.
 
 ### Single Client
-In order to innstall the Secure State Sharing as single client:
+In order to install the Secure State Sharing as single client:
 * Install Fiware Orion Contest Broker, following this [guide](https://fiware-orion.readthedocs.io/en/master/admin/install/index.html).
 * Configure the SSS:
 * * Under the `resource` folder, editing the `config-fabric-network.json`, in particular susbstitute `localhost` with your HLF host and ports. 
