@@ -59,7 +59,7 @@ async function serveResponse(proxyResData, req, res) {
             }
             if (req.path === '/info') {
                 res.json({
-                    name: 'Secure state Sharing',
+                    name: 'Secure State Sharing',
                     'version': '1.0.0',
                     'author': 'Antonio Scatoloni',
                 });
