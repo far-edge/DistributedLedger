@@ -14,8 +14,9 @@
 In order to innstall the Secure State Sharing as single client:
 * Install Fiware Orion Contest Broker, following this [guide](https://fiware-orion.readthedocs.io/en/master/admin/install/index.html).
 * Configure the SSS:
-* * under the `resource` folder, editing the `config-fabric-network.json`, in particular susbstitute `localhost` with your HLF host and ports. Insert in the `cryptoconfigdir` the prerequisites chosen path.
-* * edit the `config.json`, choosing che client port (default 3026) and the Orion Contest Broker host and port.
+* * Under the `resource` folder, editing the `config-fabric-network.json`, in particular susbstitute `localhost` with your HLF host and ports. 
+* * Insert in the `cryptoconfigdir` the prerequisites chosen path.
+* * Edit the `config.json`, choosing che client port (default 3026) and the Orion Contest Broker host and port.
 * Execute the command: `npm install && npm start`
 
 ### Multi Client (reccomendend)
