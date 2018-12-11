@@ -14,7 +14,7 @@
 $ docker exec -it cli bash
 $ cd .. && cd chaincode
 $ peer chaincode install -p sss-chaincode -n sss-chaincode -v 1.0
-$ peer chaincode instantiate -n sss-chaincode -c '{"Args":["a","10"]}' -C ledgerchannel -v 1.0
+$ peer chaincode instantiate -n sss-chaincode -c '{"Args":["a","10"]}' -C mychannel -v 1.0
 ```
 
 ## Usage
