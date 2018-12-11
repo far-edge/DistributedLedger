@@ -1,6 +1,6 @@
 # Secure State Sharing
 
-## Instalation
+## Installation
 ### Prerequisites
 * Linux Environment.
 * Administrative access to the machine.
@@ -18,13 +18,13 @@ In order to innstall the Secure State Sharing as single client:
 * * edit the `config.json`, choosing che client port (default 3026) and the Orion Contest Broker host and port.
 * Execute the command: `npm install && npm start`
 
-### Multi Client (raccomendend)
+### Multi Client (reccomendend)
 In order to innstall the Secure State Sharing as Multi client installation (Two clients and Two OCBs sinstalled):
 * Inside the `docker` folder edit the configuration for the two instances as in the previous steps, editing the file under `resources`for the first system and under `reosurces_1` for the other.
 * If you can, *choose different HLF peers* (editing the config-fabric-network.json) for the two systems.
 * From the root of the project execute: `npm run docker`.
 * You have now two different installations working, composed by the two clients and two different OCBs.
 
-### Usage
-In order to use the Secure State Sharing please refer to the [NGSI v2 APIs](http://telefonicaid.github.io/fiware-orion/api/v2/stable/).
+## Usage
+In order to use the Secure State Sharing please refer to the [NGSI v2 APIs](http://telefonicaid.github.io/fiware-orion/api/v2/stable/l).
 The service is available at the choosen PORT (default 3026) in config.json file.
