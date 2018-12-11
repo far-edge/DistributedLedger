@@ -1,5 +1,5 @@
 # Secure State Sharing
-The Secure State Sharing acts as a Proxy for the Orion Context Broker, connected to the Hyperledger Fabric in order to make the Orion Entities global in the blockchain network. 
+The Secure State Sharing acts as a Proxy for the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/master/), connected to the Hyperledger Fabric in order to make the Orion Entities global in the blockchain network. 
 
 ## Installation
 ### Prerequisites
