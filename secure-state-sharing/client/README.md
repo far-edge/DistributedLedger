@@ -26,7 +26,8 @@ In order to install the Secure State Sharing as single client:
 In order to innstall the Secure State Sharing as Multi client installation (Two clients and Two OCBs installed):
 * Inside the `docker` folder edit the configuration for the two instances as in the previous steps, editing the file under `resources`for the first system and under `reosurces_1` for the other.
 * If you can, *choose different HLF PEERS* (editing the `config-fabric-network.json`) for the two systems.
-* From the root of the project execute: `npm run docker`.
+* From the root of the project execute: `npm run docker` to build the docker image.
+* Under the `docker directory launch the commands: `./start.sh` to run the full system.
 * You have now two different installations working, composed by the two clients and two different OCBs.
 
 ## Usage
