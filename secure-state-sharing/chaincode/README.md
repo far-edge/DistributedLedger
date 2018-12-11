@@ -5,7 +5,7 @@
 * Linux Environment.
 * Administrative access to the machine.
 * Access to Internet.
-* [Node](https://nodejs.org/en/download/) and npm correctly installed (version 8.x or greater) (OPTIONAL)
+* [Node](https://nodejs.org/en/download/) and npm correctly installed (version 8.x or greater) (*Optional*)
 * Install **Hyperledger Fabric version 1.3** following this installation [guide](https://hyperledger-fabric.readthedocs.io/en/release-1.3/getting_started.html).
 * Clone the repository: `git clone https://github.com/far-edge/DistributedLedger.git && cd secure-state-sharing`
 * Copy the `chaincode` folder and rename it as `sss-chaincode` under your HLF installation machine.
