@@ -14,7 +14,7 @@
 $ docker exec -it cli bash
 $ peer chaincode install -p sss-chaincode-node -n sss-chaincode-node -v 1.0
 $ peer chaincode instantiate -n sss-chaincode-node -c '{"Args":["a","10"]}' -C ledgerchannel -v 1.0
-``
+```
 
 ## Usage
 In order to use the Secure State Sharing chaincode please install the Secure [State Sharing client](https://github.com/far-edge/DistributedLedger/tree/develop/secure-state-sharing/client).
