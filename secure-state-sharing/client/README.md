@@ -20,7 +20,7 @@ In order to innstall the Secure State Sharing as single client:
 * Execute the command: `npm install && npm start`
 
 ### Multi Client (reccomendend)
-In order to innstall the Secure State Sharing as Multi client installation (Two clients and Two OCBs sinstalled):
+In order to innstall the Secure State Sharing as Multi client installation (Two clients and Two OCBs installed):
 * Inside the `docker` folder edit the configuration for the two instances as in the previous steps, editing the file under `resources`for the first system and under `reosurces_1` for the other.
 * If you can, *choose different HLF PEERS* (editing the `config-fabric-network.json`) for the two systems.
 * From the root of the project execute: `npm run docker`.
