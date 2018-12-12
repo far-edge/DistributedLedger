@@ -37,7 +37,7 @@ public class UnitTest {
 
                 }
             };
-            DDAEvent = ddaLedgerClient.doRegisterEvent("EVENT NAME", chaincodeEventListener);
+            DDAEvent = ddaLedgerClient.doRegisterEvent("$_EVENT", chaincodeEventListener);
         } catch (JLedgerClientException e) {
             assertFalse(e.getMessage(), true);
         }
