@@ -1,4 +1,4 @@
-# smartfactory-usecase-client
+# SmartFactory - Secure Order Execution System Client
 
 
 ## Library API

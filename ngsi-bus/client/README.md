@@ -1,5 +1,6 @@
-# Secure State Sharing
-The Secure State Sharing acts as a Proxy for the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/master/), connected to the [Hyperledger Fabric](https://hyperledger-fabric.readthedocs.io) in order to make the Orion Entities global in the blockchain network. 
+# NGSI Bus
+
+The Secure State Sharing(NGSI Bus) acts as a Proxy for the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/master/), connected to the [Hyperledger Fabric](https://hyperledger-fabric.readthedocs.io) in order to make the Orion Entities global in the blockchain network. 
 
 ## Installation
 ### Prerequisites

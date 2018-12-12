@@ -1,2 +1,0 @@
-# smartfactory-usecase-chaincode
-

@@ -1,4 +1,4 @@
-# distributed-data-analytics-ledgerClient
+# Opaque Object Registry - Distributed Data Analytics
 
 ## Analytics
 

@@ -1,4 +1,4 @@
-# Secure State Sharing Chaincode
+# NGSI Bus Chaincode
 
 ## Installation
 ### Prerequisites

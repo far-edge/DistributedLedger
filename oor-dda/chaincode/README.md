@@ -1,6 +1,8 @@
-# DDA Chaincode Open API  
+#Opaque Object Registry - Distributed Data Analytics Chaincode
 
-## Analytics
+## Open APIs
+
+### Analytics
 
 * POST @ /analytics-instances   =  **editAnalyticsInstance**
 * PUT @ /analytics-instances/:id/specification = **editAnalyticsInstance**
@@ -9,13 +11,13 @@
 * GET @ /analytics-instances/:id/specification = **getAnalyticsInstancesBySpecification**
 * POST @ /analytics-instances/discover = **discoverAnalyticsInstances**
 
-## Data Sources
+### Data Sources
 
 * POST @ /data-sources = **createDataSource**
 * DELETE @ /data-sources/:id = **deleteDataSource**
 * POST  @ /data-sources/discover = **discoverDataSources**
 
-## Edge Gateways
+### Edge Gateways
 
 * POST @ /edge-gateways = **editEdgeGateway**
 * PUT @ /edge-gateways/:id = **editEdgeGateway**
