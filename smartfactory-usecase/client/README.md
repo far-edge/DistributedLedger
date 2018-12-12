@@ -1,7 +1,7 @@
 # smartfactory-usecase-client
 
 
-# Library API
+## Library API
 
  ```java
 void storeOrderCommand(OrderCommand orderCommand) throws JLedgerClientException;
@@ -14,7 +14,7 @@ Collection<OrderCommand> getOrderCommandByCustomer(String customer) throws JLedg
 
 OrderCommand getOrderCommand(String order, String customer) throws JLedgerClientException;
 ```
-# Usage
+## Usage
 
 In the test folder there are an example of how to use this library.
 
