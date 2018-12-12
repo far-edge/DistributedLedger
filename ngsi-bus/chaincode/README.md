@@ -18,4 +18,4 @@ $ peer chaincode instantiate -n sss-chaincode -c '{"Args":["a","10"]}' -C mychan
 ```
 
 ## Usage
-In order to use the Ngsi Bus chaincode please install the [Ngsi Bus client](https://github.com/far-edge/DistributedLedger/tree/develop/ngsi-bus/client).
+In order to use the NGSI Bus chaincode please install the [NGSI Bus client](https://github.com/far-edge/DistributedLedger/tree/develop/ngsi-bus/client).
