@@ -89,7 +89,7 @@ func addTypeToCouchDBQuery(parameterName string, paramaterValue string) string {
 // =========================================================================================
 func getQueryResultForQueryString(stub shim.ChaincodeStubInterface, queryString string) ([]byte, error) {
 
-	logger.Info("- getQueryResultForQueryString queryString:\n", queryString)
+	//logger.Info("- getQueryResultForQueryString queryString:\n", queryString)
 	resultsIterator, err := stub.GetQueryResult(queryString)
 	if err != nil {
 		logger.Error("GetQueryResult ERROR!")
@@ -101,7 +101,7 @@ func getQueryResultForQueryString(stub shim.ChaincodeStubInterface, queryString 
 	if err != nil {
 		return nil, err
 	}
-	logger.Info("- getQueryResultForQueryString queryResult:\n%s\n", data)
+	logger.Info("- getQueryResultForQueryString queryResult:\n", data)
 	return []byte(data), nil
 }
 
