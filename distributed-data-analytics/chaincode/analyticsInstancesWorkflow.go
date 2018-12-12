@@ -49,6 +49,12 @@ func (t *DistributedDataAnalyticsWorkflow) discoverAnalyticsInstances(stub shim.
 		return shim.Error(err.Error())
 	}
 	logger.Info("Discover AnalyticsInstances Result", string(buffer))
+	s := string(buffer[:])
+	err = setAnalyticsEvent(stub, []byte("discoverAnalyticsInstances: "+s))
+	if err != nil {
+		logger.Error("SetEvent() ERROR!\n")
+		return shim.Error(err.Error())
+	}
 	return shim.Success(buffer)
 }
 
@@ -69,6 +75,12 @@ func goGetAnalyticsInstancesBySpecification(stub shim.ChaincodeStubInterface, ar
 	if err1 != nil {
 		logger.Error("GetState() ERROR\n")
 		return nil, err1
+	}
+	s := string(byteAnalitycs[:])
+	err = setAnalyticsEvent(stub, []byte("getAnalyticsInstancesBySpecification: "+s))
+	if err != nil {
+		logger.Error("SetEvent() ERROR!\n")
+		return nil, err
 	}
 	logger.Info("AnalitycsInstances retrived: ", string(byteAnalitycs))
 	return byteAnalitycs, nil
@@ -102,13 +114,6 @@ func goGetAnalyticsInstancesById(stub shim.ChaincodeStubInterface, args []string
 		errDef = errors.New("getAnalyticsInstancesById() ERROR: Expect exactly 1 arg!")
 		return nil, errDef
 	}
-
-	/* stateQueryIteratorInterface, err := stub.GetStateByPartialCompositeKey("FE_Analytics_Instances", args)
-	if err != nil {
-		logger.Error("GetStateByPartialCompositeKey() ERROR")
-		return nil, err
-	} */
-
 	queryString :=
 		OPEN_BRACKET +
 			SELECTOR +
@@ -122,33 +127,12 @@ func goGetAnalyticsInstancesById(stub shim.ChaincodeStubInterface, args []string
 		return nil, err
 	}
 	logger.Debug("getAnalitycsByID Result: ", string(buffer))
-	err = setAnalyticsEvent(stub, buffer)
+	err = setAnalyticsEvent(stub, []byte("getAnalyticsInstancesById: "+string(buffer[:])))
 	if err != nil {
 		logger.Error("SetEvent() ERROR!\n")
 		return nil, err
 	}
 	return buffer, nil
-
-	/* var analitycsStrinArray []string
-
-	for stateQueryIteratorInterface.HasNext() {
-		analitycsInterface, err := stateQueryIteratorInterface.Next()
-		if err != nil {
-			logger.Error("stateQueryIteratorInterface.Next() ERROR")
-			return nil, err
-		}
-		logger.Debug("Single Analitycs discover: ", string(analitycsInterface.Value))
-		analitycsStrinArray = append(analitycsStrinArray, string(analitycsInterface.Value))
-	}
-	jsonResp := strings.Join(analitycsStrinArray, "")
-	logger.Debug("Query Response: " + jsonResp)
-
-	err = setAnalyticsEvent(stub, []byte(jsonResp))
-	if err != nil {
-		logger.Error("SetEvent() ERROR!\n")
-		return nil, err
-	}
-	return []byte(jsonResp), nil */
 }
 
 func (t *DistributedDataAnalyticsWorkflow) deleteAnalyticsInstance(stub shim.ChaincodeStubInterface, args []string) pb.Response {
