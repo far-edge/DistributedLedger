@@ -76,6 +76,9 @@ In this use case we have 3 different _eventName_:
 Example:
 
 ```java
+static String DDAEvent1;
+static String DDAEvent2;
+static String DDAEvent3;
 static ChaincodeEventListener chaincodeEventListener;
 chaincodeEventListener = new ChaincodeEventListener() {
     @Override
@@ -84,5 +87,7 @@ chaincodeEventListener = new ChaincodeEventListener() {
         System.out.println("Event from chaincode: " +       chaincodeEvent.getEventName() + " " + payload);
                 }
             };
-DDAEvent = ddaLedgerClient.doRegisterEvent("$_Event", chaincodeEventListener);
+DDAEvent1 = ddaLedgerClient.doRegisterEvent("FE_Analytics_Instances_Event", chaincodeEventListener);
+DDAEvent2 = ddaLedgerClient.doRegisterEvent("FE_DataSource_Event", chaincodeEventListener);
+DDAEvent3 = ddaLedgerClient.doRegisterEvent("FE_EgeGateway_Event", chaincodeEventListener);
 ```
