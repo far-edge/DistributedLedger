@@ -69,9 +69,9 @@ This method needs two arguments: a string called **eventName** and an object **C
 
 In this use case we have 3 different _eventName_:
 
-- ANALYTICS_EVENT
-- DATA_SOURCE_EVENT
-- EDGE_GATEWAY_EVENT
+- **FE_Analytics_Instances_Event**
+- **FE_EgeGateway_Event**
+- **FE_DataSource_Event**
 
 Example:
 
