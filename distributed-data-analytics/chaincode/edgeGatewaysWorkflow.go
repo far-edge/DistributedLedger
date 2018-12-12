@@ -51,7 +51,12 @@ func (t *DistributedDataAnalyticsWorkflow) discoverEdgeGateways(stub shim.Chainc
 	if err != nil {
 		return shim.Error(err.Error())
 	}
-	logger.Info("Discover edgeGatewayInstances Result", string(buffer))
+	err = setEdgeEvent(stub, []byte("discoverEdgeGateways: "+string(buffer[:])))
+	if err != nil {
+		logger.Error("SetEvent() ERROR!\n")
+		//return shim.Error(err.Error())
+	}
+	logger.Info("Discover edgeGatewayInstances Result", string(buffer[:]))
 	return shim.Success(buffer)
 }
 
@@ -124,7 +129,12 @@ func (t *DistributedDataAnalyticsWorkflow) getEdgeGateway(stub shim.ChaincodeStu
 		logger.Error("GetState() ERROR\n")
 		return shim.Error("GetState() ERROR")
 	}
-	logger.Info("EdgeGateway retrived: ", string(edgeGatewayAnalitycs))
+	err = setEdgeEvent(stub, []byte("getEdgeGateway: "+string(edgeGatewayAnalitycs[:])))
+	if err != nil {
+		logger.Error("SetEvent() ERROR!\n")
+		return shim.Error(err.Error())
+	}
+	logger.Info("EdgeGateway retrived: ", string(edgeGatewayAnalitycs[:]))
 	return shim.Success(edgeGatewayAnalitycs)
 }
 
