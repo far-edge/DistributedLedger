@@ -142,7 +142,7 @@ func (t *DistributedDataAnalyticsWorkflow) discoverDataSources(stub shim.Chainco
 	if err != nil {
 		return shim.Error(err.Error())
 	}
-	err = setDataEvent(stub, buffer)
+	err = setDataEvent(stub, []byte("discoverDataSources: "+string(buffer[:])))
 	if err != nil {
 		logger.Error("SetEvent() ERROR!\n")
 		return shim.Error(err.Error())
