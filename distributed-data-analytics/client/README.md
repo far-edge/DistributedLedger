@@ -84,5 +84,5 @@ chaincodeEventListener = new ChaincodeEventListener() {
         System.out.println("Event from chaincode: " +       chaincodeEvent.getEventName() + " " + payload);
                 }
             };
-DDAEvent = ddaLedgerClient.doRegisterEvent("$_EVENT", chaincodeEventListener);
+DDAEvent = ddaLedgerClient.doRegisterEvent("$_Event", chaincodeEventListener);
 ```
