@@ -21,11 +21,13 @@ class SecureStateSharing {
      * @param {String} requestType 
      */
     async executeRequest(id, type, requestType) {
-        let entity;
+        let entity = {id, type};
         try {
+            if(requestType !== 'DELETE'){
             entity = await orionHandler.getEntity(id, type);
             if (entity && entity.hasOwnProperty('entity'))
                 entity = entity.entity;
+            }
             let result = null;
             result = await blockchainHandler.executeOperation(entity, requestType);
             if (result && requestType === 'MIGRATION')

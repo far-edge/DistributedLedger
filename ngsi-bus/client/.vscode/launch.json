@@ -23,12 +23,6 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Companion",
-            "program": "${workspaceFolder}/companion/src/server.js"
-        },
-        {
-            "type": "node",
-            "request": "launch",
             "name": "Secure State Sharing",
             "program": "${workspaceFolder}/src/server.js"
         }

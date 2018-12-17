@@ -23,7 +23,7 @@ class RequestHandler {
         if (req.params && req.params[0])
             idParam = req.params[0].split("/")[2];
         if (idParam) return idParam;
-        if (req.body.id) return req.body.id;
+        if (req.body && req.body.id) return req.body.id;
         if (req.path) return req.path.split("/")[3];
 
         throw new Error('Entity id not found');
