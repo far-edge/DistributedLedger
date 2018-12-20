@@ -102,7 +102,9 @@ var Chaincode = class {
       }
       stub.setEvent("FE_SSS_DELETE-ENTITY", Buffer.from(JSON.stringify(eventKey)));
 
-      return shim.success(Buffer.from(promiseDelete));
+     return shim.success(
+            Buffer.from("deleteEntity - Delete successfull!")
+          );
     } catch (e) {
       let revertEntityByte = await stub.getState(keySSS);
       logger.error("deleteEntity - ERROR CATCH: " + e);
@@ -142,7 +144,7 @@ var Chaincode = class {
           let entityGetFlat = JSON.parse(entityString);
           //let entityInputFlat = flatten(entityInput);
           //let entityGetFlat = flatten(entityGet);
-
+          /*
           for (var field in entityInput) {
             if (
               entityInput.hasOwnProperty(field) !=
@@ -152,6 +154,7 @@ var Chaincode = class {
             }
           }
           logger.info("updateEntity: Correct structure!!");
+          */
           logger.info(" Start updating the entity...");
           await stub.putState(keySSS, Buffer.from(JSON.stringify(entityInput)));
           logger.debug("updateEntity - Store successfull!!!");
