@@ -11,9 +11,9 @@ import org.hyperledger.fabric.shim.ChaincodeStub;
 import org.hyperledger.fabric.shim.ledger.CompositeKey;
 import utilis.JsonConverter;
 
-public class AECLedgerServiceChaincode extends ChaincodeBase {
+public class ARPLedgerServiceChaincode extends ChaincodeBase {
 
-    private static Log _logger = LogFactory.getLog(AECLedgerServiceChaincode.class);
+    private static Log _logger = LogFactory.getLog(ARPLedgerServiceChaincode.class);
 
     @Override
     public Response init(ChaincodeStub stub) {
@@ -154,6 +154,6 @@ public class AECLedgerServiceChaincode extends ChaincodeBase {
 
     public static void main(String[] args) {
 
-        new AECLedgerServiceChaincode().start(args);
+        new ARPLedgerServiceChaincode().start(args);
     }
 }
