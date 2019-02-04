@@ -1,1 +1,1 @@
-# Analytics Engine Configuration Ledger Service - Chaincode
+# Analytics Result Publishing Ledger Service - Chaincode
