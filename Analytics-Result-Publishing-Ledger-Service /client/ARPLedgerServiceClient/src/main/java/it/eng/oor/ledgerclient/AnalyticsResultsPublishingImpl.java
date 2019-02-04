@@ -10,13 +10,13 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OORImpl extends HLFLedgerClient implements OOR {
-    private final static Logger log = LogManager.getLogger(OORImpl.class);
+public class AnalyticsResultsPublishingImpl extends HLFLedgerClient implements AnalyticsResultsPublishing {
+    private final static Logger log = LogManager.getLogger(AnalyticsResultsPublishingImpl.class);
 
-    public OORImpl() throws JLedgerClientException {
+    public AnalyticsResultsPublishingImpl() throws JLedgerClientException {
     }
 
-    public OORImpl(InputStream configFabricNetwork, InputStream certificate, InputStream keystore) throws JLedgerClientException {
+    public AnalyticsResultsPublishingImpl(InputStream configFabricNetwork, InputStream certificate, InputStream keystore) throws JLedgerClientException {
         super(configFabricNetwork, certificate, keystore);
     }
 

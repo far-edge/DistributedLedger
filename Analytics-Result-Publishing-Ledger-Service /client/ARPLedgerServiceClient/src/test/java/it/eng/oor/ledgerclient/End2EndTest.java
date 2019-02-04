@@ -13,7 +13,7 @@ import java.io.InputStream;
 
 public class End2EndTest {
 
-    static OORImpl oor;
+    static AnalyticsResultsPublishingImpl oor;
     static ChaincodeEventListener chaincodeEventListener;
     static String oorEvent;
 
@@ -23,7 +23,7 @@ public class End2EndTest {
         InputStream config = ClassLoader.getSystemResourceAsStream("./config-fabric-network.json");
         InputStream cert = ClassLoader.getSystemResourceAsStream("./ca-cert.pem");
         InputStream keystore = ClassLoader.getSystemResourceAsStream("./");
-        oor = new OORImpl(config, cert, keystore);
+        oor = new AnalyticsResultsPublishingImpl(config, cert, keystore);
         chaincodeEventListener = new ChaincodeEventListener() {
             @Override
             public void received(String handle, BlockEvent blockEvent, ChaincodeEvent chaincodeEvent) {

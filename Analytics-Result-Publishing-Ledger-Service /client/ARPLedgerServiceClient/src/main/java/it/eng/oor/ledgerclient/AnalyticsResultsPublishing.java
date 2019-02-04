@@ -2,7 +2,7 @@ package it.eng.oor.ledgerclient;
 
 import it.eng.jledgerclient.exception.JLedgerClientException;
 
-public interface OOR {
+public interface AnalyticsResultsPublishing {
 
 
     void post(String key, String payload) throws JLedgerClientException;

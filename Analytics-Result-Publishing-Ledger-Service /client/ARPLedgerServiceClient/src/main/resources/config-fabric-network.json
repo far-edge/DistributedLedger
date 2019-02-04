@@ -6,8 +6,8 @@
   "cryptoconfigdir": "",
   "tls": false,
   "chaincode": {
-    "path": "github.com/hyperledger/fabric/examples/chaincode/go/oor-chaincode",
-    "name": "oor-chaincode",
+    "path": "github.com/hyperledger/fabric/examples/chaincode/go/arp-chaincode",
+    "name": "arp-chaincode",
     "version": ""
   },
   "organizations": [
