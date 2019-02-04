@@ -5,20 +5,20 @@ import (
 	pb "github.com/hyperledger/fabric/protos/peer"
 )
 
-var logger = shim.NewLogger("AEC-Ledger-Service-chaincode-log")
+var logger = shim.NewLogger("ARP-Ledger-Service-chaincode-log")
 
-type AECLedgerService struct {
+type ARPLedgerService struct {
 	testMode bool
 }
 
-func (t *AECLedgerService) Init(stub shim.ChaincodeStubInterface) pb.Response {
+func (t *ARPLedgerService) Init(stub shim.ChaincodeStubInterface) pb.Response {
 
 	logger.Info("Chaincode Interface - Init()\n")
 	logger.SetLevel(shim.LogDebug)
 	return shim.Success(nil)
 }
 
-func (t *AECLedgerService) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
+func (t *ARPLedgerService) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	logger.Debug("Chaincode Interface - Invoke()\n")
 	function, args := stub.GetFunctionAndParameters()
 
@@ -35,7 +35,7 @@ func (t *AECLedgerService) Invoke(stub shim.ChaincodeStubInterface) pb.Response 
 	}
 }
 
-func (t *AECLedgerService) edit(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *ARPLedgerService) edit(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	logger.Info("Chaincode Interface - put()")
 
 	if len(args) != 2 {
@@ -54,7 +54,7 @@ func (t *AECLedgerService) edit(stub shim.ChaincodeStubInterface, args []string)
 		logger.Error("PutState() Error!")
 		return shim.Error(err.Error())
 	}
-	eventName := "AECLedgerService_EDIT"
+	eventName := "ARPLedgerService_EDIT"
 	err = createEvent(stub, eventName, []byte(args[1]))
 	if err != nil {
 		return shim.Error(err.Error())
@@ -63,7 +63,7 @@ func (t *AECLedgerService) edit(stub shim.ChaincodeStubInterface, args []string)
 	return shim.Success(nil)
 }
 
-func (t *AECLedgerService) get(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *ARPLedgerService) get(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 
 	logger.Info("Chaincode Interface - get()")
 
@@ -82,7 +82,7 @@ func (t *AECLedgerService) get(stub shim.ChaincodeStubInterface, args []string) 
 		logger.Error("GetState() ERROR!!")
 		return shim.Error(err.Error())
 	}
-	eventName := "AECLedgerService_GET"
+	eventName := "ARPLedgerService_GET"
 	err = createEvent(stub, eventName, byteReturn)
 	if err != nil {
 		return shim.Error(err.Error())
@@ -91,7 +91,7 @@ func (t *AECLedgerService) get(stub shim.ChaincodeStubInterface, args []string) 
 	return shim.Success(byteReturn)
 }
 
-func (t *AECLedgerService) delete(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *ARPLedgerService) delete(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 
 	logger.Info("Chaincode Interface - delete()")
 
@@ -110,7 +110,7 @@ func (t *AECLedgerService) delete(stub shim.ChaincodeStubInterface, args []strin
 		logger.Error("DelState() ERROR!!")
 		return shim.Error(err.Error())
 	}
-	eventName := "AECLedgerService_DELETE"
+	eventName := "ARPLedgerService_DELETE"
 	err = createEvent(stub, eventName, []byte("object deleted!"))
 	if err != nil {
 		return shim.Error(err.Error())
@@ -135,10 +135,10 @@ func createEvent(stub shim.ChaincodeStubInterface, eventName string, payload []b
 
 }
 func main() {
-	twc := new(AECLedgerService)
+	twc := new(ARPLedgerService)
 	twc.testMode = true
 	err := shim.Start(twc)
 	if err != nil {
-		logger.Error("Error starting Analytics-Engine-Configuration-Ledger-Service chaincode: ", err)
+		logger.Error("Error starting Analytics-Results-Publishing-Ledger-Service chaincode: ", err)
 	}
 }
