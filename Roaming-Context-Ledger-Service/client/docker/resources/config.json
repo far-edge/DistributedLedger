@@ -1,0 +1,9 @@
+{
+    "port": 3026,
+    "ocb": "http://docker_orion_1:1026",
+    "service": "",
+    "servicepath": "",
+    "development": false,
+    "path_exclude": "op,subscriptions",
+    "logLevel": "debug"
+}
