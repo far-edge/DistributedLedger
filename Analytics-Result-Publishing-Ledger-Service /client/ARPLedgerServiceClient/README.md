@@ -1,1 +1,1 @@
-# Opaque Object Registry - Client
+# Analytics-Result-Publishing-Ledger-Service - Client
