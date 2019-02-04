@@ -1,1 +1,1 @@
-# Opaque Object Registry - Chaincode
+# Analytics Engine Configuration Ledger Service - Chaincode
