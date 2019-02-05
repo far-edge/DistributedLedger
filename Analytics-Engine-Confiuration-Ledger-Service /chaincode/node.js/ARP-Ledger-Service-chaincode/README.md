@@ -1,1 +1,0 @@
-# OOR-chaincode-node

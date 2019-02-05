@@ -5,37 +5,37 @@ import (
 	pb "github.com/hyperledger/fabric/protos/peer"
 )
 
-var logger = shim.NewLogger("ARP-Ledger-Service-chaincode-log")
+var logger = shim.NewLogger("AEC-Ledger-Service-chaincode-log")
 
-type ARPLedgerService struct {
+type AECLedgerService struct {
 	testMode bool
 }
 
-func (t *ARPLedgerService) Init(stub shim.ChaincodeStubInterface) pb.Response {
+func (t *AECLedgerService) Init(stub shim.ChaincodeStubInterface) pb.Response {
 
 	logger.Info("Chaincode Interface - Init()\n")
 	logger.SetLevel(shim.LogDebug)
 	return shim.Success(nil)
 }
 
-func (t *ARPLedgerService) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
+func (t *AECLedgerService) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	logger.Debug("Chaincode Interface - Invoke()\n")
 	function, args := stub.GetFunctionAndParameters()
 
-	if function == "postResult" {
-		return t.editResult(stub, args)
-	} else if function == "putResult" {
-		return t.editResult(stub, args)
-	} else if function == "deleteResult" {
-		return t.deleteResult(stub, args)
-	} else if function == "getResult" {
-		return t.getResult(stub, args)
+	if function == "postConfiguration" {
+		return t.editConfiguration(stub, args)
+	} else if function == "putConfiguration" {
+		return t.editConfiguration(stub, args)
+	} else if function == "deleteConfiguration" {
+		return t.deleteConfiguration(stub, args)
+	} else if function == "getConfiguration" {
+		return t.getConfiguration(stub, args)
 	} else {
 		return shim.Error("Invalid invoke function name")
 	}
 }
 
-func (t *ARPLedgerService) editResult(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *AECLedgerService) editConfiguration(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	logger.Info("Chaincode Interface - put()")
 
 	if len(args) != 2 {
@@ -54,7 +54,7 @@ func (t *ARPLedgerService) editResult(stub shim.ChaincodeStubInterface, args []s
 		logger.Error("PutState() Error!")
 		return shim.Error(err.Error())
 	}
-	eventName := "ARPLedgerService_EDIT"
+	eventName := "AECLedgerService_EDIT"
 	err = createEvent(stub, eventName, []byte(args[1]))
 	if err != nil {
 		return shim.Error(err.Error())
@@ -63,7 +63,7 @@ func (t *ARPLedgerService) editResult(stub shim.ChaincodeStubInterface, args []s
 	return shim.Success(nil)
 }
 
-func (t *ARPLedgerService) getResult(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *AECLedgerService) getConfiguration(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 
 	logger.Info("Chaincode Interface - get()")
 
@@ -82,7 +82,7 @@ func (t *ARPLedgerService) getResult(stub shim.ChaincodeStubInterface, args []st
 		logger.Error("GetState() ERROR!!")
 		return shim.Error(err.Error())
 	}
-	eventName := "ARPLedgerService_GET"
+	eventName := "AECLedgerService_GET"
 	err = createEvent(stub, eventName, byteReturn)
 	if err != nil {
 		return shim.Error(err.Error())
@@ -91,7 +91,7 @@ func (t *ARPLedgerService) getResult(stub shim.ChaincodeStubInterface, args []st
 	return shim.Success(byteReturn)
 }
 
-func (t *ARPLedgerService) deleteResult(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *AECLedgerService) deleteConfiguration(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 
 	logger.Info("Chaincode Interface - delete()")
 
@@ -110,7 +110,7 @@ func (t *ARPLedgerService) deleteResult(stub shim.ChaincodeStubInterface, args [
 		logger.Error("DelState() ERROR!!")
 		return shim.Error(err.Error())
 	}
-	eventName := "ARPLedgerService_DELETE"
+	eventName := "AECLedgerService_DELETE"
 	err = createEvent(stub, eventName, []byte("object deleted!"))
 	if err != nil {
 		return shim.Error(err.Error())
@@ -135,10 +135,10 @@ func createEvent(stub shim.ChaincodeStubInterface, eventName string, payload []b
 
 }
 func main() {
-	twc := new(ARPLedgerService)
+	twc := new(AECLedgerService)
 	twc.testMode = true
 	err := shim.Start(twc)
 	if err != nil {
-		logger.Error("Error starting Analytics-Results-Publishing-Ledger-Service chaincode: ", err)
+		logger.Error("Error starting Analytics-Engine-Configuration-Ledger-Service chaincode: ", err)
 	}
 }
