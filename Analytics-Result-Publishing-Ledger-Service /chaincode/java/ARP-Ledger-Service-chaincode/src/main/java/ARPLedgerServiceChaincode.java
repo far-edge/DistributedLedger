@@ -50,16 +50,16 @@ public class ARPLedgerServiceChaincode extends ChaincodeBase {
             String func = stub.getFunction();
             List<String> params = stub.getParameters();
             if (func.equals("putData")) {
-                return putEntity(stub, params);
+                return putData(stub, params);
             }
             if (func.equals("deleteData")) {
-                return deleteEntity(stub, params);
+                return deleteData(stub, params);
             }
             /*if (func.equals("updateEntity")) {
                 return updateEntity(stub, params);
             }*/
             if (func.equals("getData")) {
-                return getEntity(stub, params);
+                return getData(stub, params);
             }
             return newErrorResponse("Invalid invoke function name. Expecting one of: [\"putEntity\", \"deleteEntity\", \", \"updateEntity\"\" , \"getEntity\"]");
         } catch (Throwable e) {
