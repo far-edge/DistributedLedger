@@ -1,4 +1,4 @@
-# NGSI Bus Chaincode
+# Roaming Context Ledger Service - Chaincode
 
 ## Installation
 ### Prerequisites
