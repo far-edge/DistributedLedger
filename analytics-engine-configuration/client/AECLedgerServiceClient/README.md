@@ -61,7 +61,6 @@ chaincodeEventListener = new ChaincodeEventListener() {
 		System.out.println("Event from chaincode: " + chaincodeEvent.getEventName() + " 			" + payload);
 		}
 	};
-event = aecClient.doRegisterEvent("SMARTFACTORY_USECASE_EVENT", chaincodeEventL
-istener);
+event = aecClient.doRegisterEvent("SMARTFACTORY_USECASE_EVENT", chaincodeEventListener);
 ```
 
