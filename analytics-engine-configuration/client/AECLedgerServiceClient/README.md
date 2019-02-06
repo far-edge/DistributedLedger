@@ -51,8 +51,8 @@ Example:
 
 ```java
 ChaincodeEventListener chaincodeEventListener;
-String smartfactoryUsecaseEvent;
-SmartFactoryLedgerClientImpl smartFactoryLedgerClient;
+String event;
+AnalyticsEngineConfigurationImpl aecClient;
 
 chaincodeEventListener = new ChaincodeEventListener() {
     @Override
@@ -61,7 +61,7 @@ chaincodeEventListener = new ChaincodeEventListener() {
 		System.out.println("Event from chaincode: " + chaincodeEvent.getEventName() + " 			" + payload);
 		}
 	};
-smartfactoryUsecaseEvent = smartFactoryLedgerClient.doRegisterEvent("SMARTFACTORY_USECASE_EVENT", chaincodeEventL
+event = aecClient.doRegisterEvent("SMARTFACTORY_USECASE_EVENT", chaincodeEventL
 istener);
 ```
 
