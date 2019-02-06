@@ -56,9 +56,9 @@ AnalyticsResultPublishingImpl arpClient;
 
 chaincodeEventListener = new ChaincodeEventListener() {
     @Override
-	public void received(String handle, BlockEvent blockEvent, ChaincodeEvent 			chaincodeEvent) {
+	public void received(String handle, BlockEvent blockEvent, ChaincodeEvent chaincodeEvent) {
 		String payload = new String(chaincodeEvent.getPayload());
-		System.out.println("Event from chaincode: " + chaincodeEvent.getEventName() + " 			" + payload);
+		System.out.println("Event from chaincode: " + chaincodeEvent.getEventName() + " " + payload);
 		}
 	};
 Event = arpClient.doRegisterEvent(eventName, chaincodeEventListener);
