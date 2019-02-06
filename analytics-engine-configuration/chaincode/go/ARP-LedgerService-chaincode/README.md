@@ -1,1 +1,1 @@
-# Analytics Engfine Configuration Ledger Service - Chaincode
+# Analytics Engfine Configuration - Chaincode
