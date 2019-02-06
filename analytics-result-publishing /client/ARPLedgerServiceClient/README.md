@@ -6,13 +6,13 @@
 public interface AnalyticsResultsPublishing {
 
 
-    void post(String key, String payload) throws JLedgerClientException;
+    void postResult(String key, String payload) throws JLedgerClientException;
 
-    void put(String key, String payload) throws JLedgerClientException;
+    void putResult(String key, String payload) throws JLedgerClientException;
 
-    void delete(String key) throws JLedgerClientException;
+    void deleteResult(String key) throws JLedgerClientException;
 
-    String get(String key) throws JLedgerClientException;
+    String getResult(String key) throws JLedgerClientException;
 }
 ```
 

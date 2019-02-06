@@ -31,5 +31,7 @@ In order to innstall the Secure State Sharing as Multi client installation (Two 
 * Under the `docker` directory launch the commands: `./start.sh` to run the full system.
 * You have now two different installations working, composed by the two clients and two different OCBs.
 
-## Usage
 ### Migrate
+
+The Migrate method allows the migration of a context from one Context broker to another connected to the same network.
+It is a combination of POST and GET, which returns a lis of Entities that we want to be subscrive it.
