@@ -11,7 +11,7 @@ As for the chaincode this library does not maintain in any way this object, in f
 Below are the operations that our interface allows to perform:
 
 ```java
-public interface AnalyticsEngineConfiguration {
+public interface AnalyticsRsultPublishing{
     
 void postResult(String key, String payload) throws JLedgerClientException;
 void putResult(String key, String payload) throws JLedgerClientException;
