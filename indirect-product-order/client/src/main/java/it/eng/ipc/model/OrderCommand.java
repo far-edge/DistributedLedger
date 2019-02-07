@@ -1,4 +1,4 @@
-package it.eng.usecase.smartfactory.model;
+package it.eng.ipc.model;
 
 import java.util.Objects;
 

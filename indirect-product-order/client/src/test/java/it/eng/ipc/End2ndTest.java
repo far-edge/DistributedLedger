@@ -1,8 +1,8 @@
-package it.eng.usacase.smartfactory;
+package it.eng.ipc;
 
 import it.eng.jledgerclient.exception.JLedgerClientException;
-import it.eng.usecase.smartfactory.base.SmartFactoryLedgerClientImpl;
-import it.eng.usecase.smartfactory.model.OrderCommand;
+import it.eng.ipc.base.IndirectProductOrderImpl;
+import it.eng.ipc.model.OrderCommand;
 import org.hyperledger.fabric.sdk.BlockEvent;
 import org.hyperledger.fabric.sdk.ChaincodeEvent;
 import org.hyperledger.fabric.sdk.ChaincodeEventListener;
@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 public class End2ndTest {
 
-    static SmartFactoryLedgerClientImpl smartFactoryLedgerClient;
+    static IndirectProductOrderImpl smartFactoryLedgerClient;
     static ChaincodeEventListener chaincodeEventListener;
     static String smartfactoryUsecaseEvent;
 
@@ -29,7 +29,7 @@ public class End2ndTest {
             InputStream config = ClassLoader.getSystemResourceAsStream("./config-fabric-network.json");
             InputStream cert = ClassLoader.getSystemResourceAsStream("./ca-cert.pem");
             InputStream keystore = ClassLoader.getSystemResourceAsStream("./5366960a102f9db91f686c8f43004ff0ce29875c93ed72f2fa6dce90731aad4c_sk");
-            smartFactoryLedgerClient = new SmartFactoryLedgerClientImpl(config, cert, keystore);
+            smartFactoryLedgerClient = new IndirectProductOrderImpl(config, cert, keystore);
             chaincodeEventListener = new ChaincodeEventListener() {
                 @Override
                 public void received(String handle, BlockEvent blockEvent, ChaincodeEvent chaincodeEvent) {

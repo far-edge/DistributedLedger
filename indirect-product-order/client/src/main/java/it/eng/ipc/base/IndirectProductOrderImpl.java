@@ -1,12 +1,12 @@
-package it.eng.usecase.smartfactory.base;
+package it.eng.ipc.base;
 
 import it.eng.jledgerclient.exception.JLedgerClientException;
 import it.eng.jledgerclient.fabric.HLFLedgerClient;
 import it.eng.jledgerclient.fabric.helper.InvokeReturn;
 import it.eng.jledgerclient.fabric.helper.QueryReturn;
 import it.eng.jledgerclient.fabric.utils.JsonConverter;
-import it.eng.usecase.smartfactory.model.Function;
-import it.eng.usecase.smartfactory.model.OrderCommand;
+import it.eng.ipc.model.Function;
+import it.eng.ipc.model.OrderCommand;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hyperledger.fabric.sdk.ChaincodeEventListener;
@@ -19,16 +19,16 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-public final class SmartFactoryLedgerClientImpl extends HLFLedgerClient implements SmartFactoryLedgerClient {
+public final class IndirectProductOrderImpl extends HLFLedgerClient implements IndirectProductOrder {
 
-    private final static Logger log = LogManager.getLogger(SmartFactoryLedgerClientImpl.class);
+    private final static Logger log = LogManager.getLogger(IndirectProductOrderImpl.class);
 
 
-    public SmartFactoryLedgerClientImpl() throws JLedgerClientException {
+    public IndirectProductOrderImpl() throws JLedgerClientException {
         super();
     }
 
-    public SmartFactoryLedgerClientImpl(InputStream configFabricNetwork, InputStream certificate, InputStream keystore) throws JLedgerClientException {
+    public IndirectProductOrderImpl(InputStream configFabricNetwork, InputStream certificate, InputStream keystore) throws JLedgerClientException {
         super(configFabricNetwork, certificate, keystore);
     }
 

@@ -1,12 +1,12 @@
-package it.eng.usecase.smartfactory.base;
+package it.eng.ipc.base;
 
 import it.eng.jledgerclient.exception.JLedgerClientException;
 import it.eng.jledgerclient.fabric.HLFLedgerClient;
-import it.eng.usecase.smartfactory.model.OrderCommand;
+import it.eng.ipc.model.OrderCommand;
 
 import java.util.Collection;
 
-public interface SmartFactoryLedgerClient {
+public interface IndirectProductOrder {
 
 
     void storeOrderCommand(OrderCommand orderCommand) throws JLedgerClientException;
