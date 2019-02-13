@@ -2,7 +2,7 @@
 
 
 
-This is the Java library that allows you to interact with <u>Analytics-Result-Publishing Chaincode</u>. We have provided the classic **CRUD** operations (create, read, update, delete) for manage a Analytics Result Publishing object. 
+This is the Java library that allows you to interact with <u>analytics manifest</u>. We have provided the classic **CRUD** operations (create, read, update, delete) for manage a Analytics Result Publishing object. 
 
 As for the chaincode this library does not maintain in any way this object, in fact the communication between the library and the chaincode takes place through arrays of strings.
 
