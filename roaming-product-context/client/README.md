@@ -8,6 +8,7 @@ The **RPC Web Service** Provides a local Web API that interacts with both local 
 * Access to Internet.
 * [Node](https://nodejs.org/en/download/) and pm correctly installed (version 8.x or greater)
 * Docker and Docker Compose correctly installed and working.
+* Access to a HLF v1.3 system and availability of an administrator that will provide the required artifacts (digital certificate and configuration file) for connecting the OCB Proxy to the HLF network.
 * Clone the repository: `git clone https://github.com/far-edge/DistributedLedger.git && cd roaming-product-context`
 
 ### Installation Guide
