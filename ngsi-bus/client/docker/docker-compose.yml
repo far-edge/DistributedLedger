@@ -38,38 +38,38 @@ services:
    #   network_mode: configurationservice_byfn
 
 
-  mongo_1:  
-   image: mongo:3.4
-   command: --nojournal
-   volumes:
-     - ./data/mongo/data/1:/data/db
+#   mongo_1:  
+#    image: mongo:3.4
+#    command: --nojournal
+#    volumes:
+#      - ./data/mongo/data/1:/data/db
   
-  orion_1:
-   image: fiware/orion:2.0.0
-   depends_on:
-    - mongo_1
-   ports: 
-    - "2026:1026"
-   #environment:
-   command:  -dbhost mongo_1
+#   orion_1:
+#    image: fiware/orion:2.0.0
+#    depends_on:
+#     - mongo_1
+#    ports: 
+#     - "2026:1026"
+#    #environment:
+#    command:  -dbhost mongo_1
   
-  secure-state-sharing_1:
-     image: faredge/secure-state-sharing:1.0.0
-    #  environment:
-    #   - LOGGING_LEVEL = debug
-    #   - DEVELOPMENT = false
-     depends_on:
-        - orion_1
-     ports: 
-      - "4026:3026"
-     volumes:
-      - /opt/hyperledger/secure-state-sharing/secure-state-sharing_1/resources:/usr/app/resources_1
-      - /opt/hyperledger/fabric1.3/configuration-network-fabric/crypto-config:/usr/app/crypto-config
-   #   external_links:
-   #    - ca.example.com
-   #    - orderer.example.com
-   #    - peer0.org1.example.com
-   #    - peer1.org1.example.com
-   #    - peer2.org1.example.com
-   #    - peer3.org1.example.com
-   #   network_mode: configurationservice_byfn
+#   secure-state-sharing_1:
+#      image: faredge/secure-state-sharing:1.0.0
+#     #  environment:
+#     #   - LOGGING_LEVEL = debug
+#     #   - DEVELOPMENT = false
+#      depends_on:
+#         - orion_1
+#      ports: 
+#       - "4026:3026"
+#      volumes:
+#       - /opt/hyperledger/secure-state-sharing/secure-state-sharing_1/resources:/usr/app/resources_1
+#       - /opt/hyperledger/fabric1.3/configuration-network-fabric/crypto-config:/usr/app/crypto-config
+#    #   external_links:
+#    #    - ca.example.com
+#    #    - orderer.example.com
+#    #    - peer0.org1.example.com
+#    #    - peer1.org1.example.com
+#    #    - peer2.org1.example.com
+#    #    - peer3.org1.example.com
+#    #   network_mode: configurationservice_byfn
