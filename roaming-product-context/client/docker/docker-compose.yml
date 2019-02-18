@@ -12,7 +12,7 @@ services:
    depends_on:
     - mongo
    ports: 
-    - "1026:1026"
+    - "2026:1026"
    #environment:
    command:  -dbhost mongo
   
