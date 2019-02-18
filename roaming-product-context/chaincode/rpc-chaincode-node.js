@@ -3,7 +3,7 @@ const datatransform = require("./utils/datatransform");
 var logger = shim.newLogger("Roaming-Product-Context-Logger");
 logger.level = "debug";
 
-var rpcWorkFlow = class {
+var rpcChaincode = class {
   async Init(stub) {
     logger.info(" Roaming-Product-Context-Init ");
     return shim.success(Buffer.from("Init - OK!"));
@@ -180,3 +180,4 @@ var rpcWorkFlow = class {
     }
   }
 };
+shim.start(new rpcChaincode());
