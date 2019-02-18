@@ -2,33 +2,19 @@
 
 The **RPC Web Service** Provides a local Web API that interacts with both local OCB instance and the global RPC Chaincode. Three service endpoints are available to clients: Release, Acquire and Dispose.
 
-## Installation
-### Prerequisites
-* Linux Environment.
-* Administrative access to the machine.
-* Access to Internet.
-* [Node](https://nodejs.org/en/download/) and pm correctly installed (version 8.x or greater)
-* Docker and Docker Compose correctly installed and working.
-* Access to a HLF v1.3 system and availability of an administrator that will provide the required artifacts (digital certificate and configuration file) for connecting the OCB Proxy to the HLF network.
-* Clone the repository: `git clone https://github.com/far-edge/DistributedLedger.git && cd roaming-product-context`
+this **Ledger Service** is actually composed by three separate elements:
 
-### Installation Guide
-#### HLF Administrator
-* Point to the `chaincode` folder.
-*	Deploy the Node.js Chaincode in the **HLF 1.3** Network.
-*	Give users, **the digital certificates and a configuration file** in order to access to the Chaincode and Network Installation.
-#### User
-* Open a Terminal Console on your system. 
-*	Point to the `client` folder.
-*	Copy the `config-fabric-network.json` given by your HLF administrator under the folder `docker/resources`.
-*	Copy the digital certificates given by your HLF administrator, under the `docker/resources/crypto-config` folder.
-*	Install all Node dependencies with the command:  `npm -i¡.
-*	Create the Docker artifact containing the OCB + OCB Proxy with the command:  
-    `npm run docker`.
-*	Launch the system with the command: `./start.sh`. 
+-   **[Orion Context Broker (OCB)](https://fiware-orion.readthedocs.io/)**
 
+    See the NGSI Bus section above for some general information about the OCB component. In this context, local OCB instances hold the product context one at a time: the same NGSI entity cannot exist in more than one local scope, and is transferred from one scope to another with the mediation of the RPC Ledger Service and the RPC Web Service.
 
+-   **[RPC Web Service](https://github.com/far-edge/DistributedLedger/edit/develop/roaming-product-context/client)**
 
-## Usage
-<br/>The RPC Service is now available on port `4026` of your environment.
-<br/>Furthermore, users are allowed to edit and customize the `start.sh` script if they need to add some instructions to the system during the bootstrap phase.
+    Provides a local Web API that interacts with both local OCB instance and the global RPC Chaincode. Three service endpoints are available to clients: Release, Acquire and Dispose -- see below for their documentation, which also includes an explaination of their functionality.
+
+    This asset has been implemented in FAR-EDGE as a Node.js server application and is based on the HLF SDK -- i.e., the library made available by the HLF project to support Node.js clients.
+
+-   **[RPC Ledger Service](https://github.com/far-edge/DistributedLedger/edit/develop/roaming-product-context/chaincode)**
+
+    Manages NGSI entities as *sealed objects* -- i.e., an immutable copy of an NGSI entity that is identified by a unique ID and is signed by the digital identity associated to the local RPC Service. Sealed objects can be moved to any local scope, where they are unpacked and transformed again into fully-functional NGSI entity, provided that only one local scope at a time has the ownership of the "live" entity. The role of the chaincode is not only to store and retrieve individual objects on the global Distributed Ledger (DL), but also to enforce a system of "exclusive locks" on their access.
+This asset has been implemented in FAR-EDGE as a Node.js chaincode.
