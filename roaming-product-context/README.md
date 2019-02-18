@@ -6,7 +6,7 @@ this **Ledger Service** is actually composed by three separate elements:
 
 -   **[Orion Context Broker (OCB)](https://fiware-orion.readthedocs.io/)**
 
-    See the NGSI Bus section above for some general information about the OCB component. In this context, local OCB instances hold the product context one at a time: the same NGSI entity cannot exist in more than one local scope, and is transferred from one scope to another with the mediation of the RPC Ledger Service and the RPC Web Service.
+    See the [NGSI Bus](https://github.com/far-edge/DistributedLedger/edit/develop/ngsi-bus) for some general information about the OCB component. In this context, local OCB instances hold the product context one at a time: the same NGSI entity cannot exist in more than one local scope, and is transferred from one scope to another with the mediation of the RPC Ledger Service and the RPC Web Service.
 
 -   **[RPC Web Service](https://github.com/far-edge/DistributedLedger/edit/develop/roaming-product-context/client)**
 
