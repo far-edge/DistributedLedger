@@ -1,4 +1,4 @@
-# NGSI Bus Chaincode
+# NGSI Bus Ledger Service - Chaincode
 
 ## Installation
 ### Prerequisites
