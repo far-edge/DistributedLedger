@@ -9,7 +9,7 @@ This Ledger Service is actually composed by three separate elements:
 
     The OCB component and the NGSI API are not FAR-EDGE foreground, so they are not documented here.
 
--   **OCB Proxy**
+-   **[OCB Proxy](https://github.com/far-edge/DistributedLedger/edit/develop/ngsi-bus/client)**
 
     Provides clients with an access path to a hidden OCB instance, acting as a *reverse proxy* that replicates the same NGSI API. Thanks to its *man-in-the-middle* role, it injects some additional functionality in the NGSI protocol: A) intercepts NGSI *write* calls (entity create, update and delete) from the clients and transforms them into corresponding calls to the Ledger Service (see next point); B) receives entity-related notifications from the Ledger Service and transforms them into corresponding NGSI write calls to the hidden OCB instance; C) transparently forwards NGSI *read* calls from the clients to the hidden OCB instance.
 
@@ -17,7 +17,7 @@ This Ledger Service is actually composed by three separate elements:
 
     It is worth noting that its very existence stems from a trivial matter of fact: the OCB component is impractical to extend, because it's a native C++ application. It that was not the case, the best approach would have been to directly integrate the OCB with the Ledger Service, thus avoiding the inefficiency of NGSI call forwarding.
 
--   **NGSI Bus Ledger Service**
+-   **[NGSI Bus Ledger Service](https://github.com/far-edge/DistributedLedger/edit/develop/ngsi-bus/chaincode)**
 
     Maintains, in the global scope, the *master copy* of NGSI entities that are deployed on local OCB instances. Entities created in one local scope are also created on the Distributed Ledger and then propagated to all local scopes by means of the HLF event notification mechanism and with the support of local OCB Proxies. The same propagation happens for updates and deletes.
 This asset has been implemented in FAR-EDGE as a Node.js chaincode.
