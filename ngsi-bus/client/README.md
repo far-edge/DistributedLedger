@@ -7,32 +7,29 @@ The NGSI Bus acts as a Proxy for the [Orion Context Broker](https://fiware-orion
 * Linux Environment.
 * Administrative access to the machine.
 * Access to Internet.
-* [Node](https://nodejs.org/en/download/) and npm correctly installed (version 8.x or greater)
-* Install **Hyperledger Fabric version 1.3** following this installation [guide](https://hyperledger-fabric.readthedocs.io/en/release-1.3/getting_started.html). 
-* * Copy the `crypto-config` dir in local path accessible for the client.
-* Clone the repository: `git clone https://github.com/far-edge/DistributedLedger.git && cd secure-state-sharing`
-* [Install the Chaincode](https://github.com/far-edge/DistributedLedger/tree/develop/secure-state-sharing/chaincode) in your Fabric installation.
-* Install [Docker](https://www.docker.com/get-started) and Docker Compose (17.x or greater).
+* [Node](https://nodejs.org/en/download/) and pm correctly installed (version 8.x or greater)
+* Docker and Docker Compose correctly installed and working.
+* Clone the repository: `git clone https://github.com/far-edge/DistributedLedger.git && cd ngsi-bus`
 
-### Single Client
-In order to install the Secure State Sharing as single client:
-* Install Fiware Orion Contest Broker, following this [guide](https://fiware-orion.readthedocs.io/en/master/admin/install/index.html).
-* Configure the SSS:
-* * Under the `resource` folder, editing the `config-fabric-network.json`, in particular susbstitute `localhost` with your HLF host and ports. 
-* * Insert in the `cryptoconfigdir` the prerequisites chosen path.
-* * Edit the `config.json`, choosing che client port (default 3026) and the Orion Contest Broker host and port.
-* Execute the command: `npm install && npm start`
+### Installation Guide
+#### HLF Administrator
+* Point to the `chaincode` folder.
+*	Fetch the Chaincode starting from this location.
+*	Deploy the Chaincode in the HLF 1.3 Network.
+*	Give users, the digital certificates and a configuration file in order to access to the Chaincode and Network Installation.
+#### User
+*	Point to the `client` folder.
+*	Copy the `config-fabric-network.json` given by your HLF administrator under the folder `docker/resources`.
+*	Copy the digital certificates given by your HLF administrator, under the `docker/resources/crypto-config` folder.
+*	Install all Node dependencies with the command:  `npm -i¡.
+*	Create the Docker artifact containing the OCB + OCB Proxy with the command:  
+    `npm run docker`.
+*	Launch the system with the command: `./start.sh`. 
 
-### Multi Client (reccomendend)
-In order to innstall the Secure State Sharing as Multi client installation (Two clients and Two OCBs installed):
-* Inside the `docker` folder edit the configuration for the two instances as in the previous steps, editing the file under `resources`for the first system and under `reosurces_1` for the other.
-* If you can, *choose different HLF PEERS* (editing the `config-fabric-network.json`) for the two systems.
-* From the root of the project execute: `npm run docker` to build the docker image.
-* Under the `docker` directory launch the commands: `./start.sh` to run the full system.
-* You have now two different installations working, composed by the two clients and two different OCBs.
+The OCB Proxy is now available on port 3026 of your environment.
+
 
 ## Usage
-In order to use the Secure State Sharing please refer to the [NGSI v2 APIs](http://telefonicaid.github.io/fiware-orion/api/v2/stable).
+In order to use the Ngsi Bus please refer to the [NGSI v2 APIs](http://telefonicaid.github.io/fiware-orion/api/v2/stable).
 The service is available at the choosen PORT (default `3026`) in `config.json` file.
-Note that if the multicase scenario have been followed two OCBs will be running and they will be available to the default ports `3026` and `4026`. <br/>
-Furthermore, users are allowed to edit and customize the `start.sh` script if they need to add some instructions to the system during the bootstrap phase. 
+Furthermore, users are allowed to edit and customize the `start.sh` script if they need to add some instructions to the system during the bootstrap phase.
