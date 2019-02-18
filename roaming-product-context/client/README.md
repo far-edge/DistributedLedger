@@ -20,7 +20,6 @@ The **RPC Web Service** Provides a local Web API that interacts with both local 
 *	Point to the `client` folder.
 *	Copy the `config-fabric-network.json` given by your HLF administrator under the folder `docker/resources`.
 *	Copy the digital certificates given by your HLF administrator, under the `docker/resources/crypto-config` folder.
-*	Install all Node dependencies with the command:  `npm -i¡.
 *	Create the Docker artifact containing the OCB + OCB Proxy with the command:  
     `npm run docker`.
 *	Launch the system with the command: `./start.sh`. 
