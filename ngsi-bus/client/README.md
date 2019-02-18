@@ -27,10 +27,9 @@ The NGSI Bus acts as a Proxy for the [Orion Context Broker](https://fiware-orion
     `npm run docker`.
 *	Launch the system with the command: `./start.sh`. 
 
-The OCB Proxy is now available on port `3026` of your environment.
 
 
 ## Usage
 In order to use the Ngsi Bus please refer to the [NGSI v2 APIs](http://telefonicaid.github.io/fiware-orion/api/v2/stable).
-The service is available at the choosen PORT (default `3026`) in `config.json` file.
+The OCB Proxy is now available on port `3026` of your environment.
 Furthermore, users are allowed to edit and customize the `start.sh` script if they need to add some instructions to the system during the bootstrap phase.
