@@ -15,9 +15,10 @@ The NGSI Bus acts as a Proxy for the [Orion Context Broker](https://fiware-orion
 #### HLF Administrator
 * Point to the `chaincode` folder.
 *	Fetch the Chaincode starting from this location.
-*	Deploy the Chaincode in the HLF 1.3 Network.
-*	Give users, the digital certificates and a configuration file in order to access to the Chaincode and Network Installation.
+*	Deploy the Chaincode in the **HLF 1.3** Network.
+*	Give users, **the digital certificates and a configuration file** in order to access to the Chaincode and Network Installation.
 #### User
+*   Open a Terminal Console on your system. 
 *	Point to the `client` folder.
 *	Copy the `config-fabric-network.json` given by your HLF administrator under the folder `docker/resources`.
 *	Copy the digital certificates given by your HLF administrator, under the `docker/resources/crypto-config` folder.
