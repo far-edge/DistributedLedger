@@ -20,9 +20,8 @@ This Ledger Service is actually composed by three separate elements:
 -   **NGSI Bus Ledger Service**
 
     Maintains, in the global scope, the *master copy* of NGSI entities that are deployed on local OCB instances. Entities created in one local scope are also created on the Distributed Ledger and then propagated to all local scopes by means of the HLF event notification mechanism and with the support of local OCB Proxies. The same propagation happens for updates and deletes.
+This asset has been implemented in FAR-EDGE as a Node.js chaincode.
 
-    This asset has been implemented in FAR-EDGE as a Node.js chaincode.
+In a working system there are typically multiple local scopes, each served by one OCB + OCB Proxy couple running on a dedicated EG.  NGSI Bus Chaincode, on the other hand, is a "virtualized" facility: a copy of it hosted on each HLF *peer node*, but peer nodes can be physically installed anywhere. The most decentralized and elegant approach would be to run one peer node on each EG, so that the EG machine becomes a self-contained local scope which can be relocated anywhere -- along with all the edge nodes connected to it -- with a minimum of hassle.
 
-In a working system there are typically multiple local scopes, each served by one OCB + OCB Proxy couple running on a dedicated EG. This architecture was previously illustrated in Figure 1. NGSI Bus Chaincode, on the other hand, is a "virtualized" facility: a copy of it hosted on each HLF *peer node*, but peer nodes can be physically installed anywhere. The most decentralized and elegant approach would be to run one peer node on each EG, so that the EG machine becomes a self-contained local scope which can be relocated anywhere -- along with all the edge nodes connected to it -- with a minimum of hassle. In this deployment, however, we resorted to the more centralized HyperLab environment in the FAR-EDGE testbed -- see deliverable 6.7.
-
-In the paragraphs below we go through the installation steps for the NGSI Bus components on one single EG machine. The same steps should be repeated for each EG machine of the target system.
+In the [client](https://github.com/far-edge/DistributedLedger/tree/develop/ngsi-bus/client) folder you can find the installation steps for the NGSI Bus components on one single EG machine. The same steps should be repeated for each EG machine of the target system.
