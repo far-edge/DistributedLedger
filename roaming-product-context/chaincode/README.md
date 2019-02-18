@@ -1,4 +1,4 @@
-# Roaming Product Context Ledger Service - Chaincode
+# RPC Ledger Service - Chaincode
 
 ## Installation
 ### Prerequisites
