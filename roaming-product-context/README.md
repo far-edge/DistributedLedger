@@ -1,7 +1,5 @@
 # Roaming Product Context 
 
-The **RPC Web Service** Provides a local Web API that interacts with both local OCB instance and the global RPC Chaincode. Three service endpoints are available to clients: Release, Acquire and Dispose.
-
 this **Ledger Service** is actually composed by three separate elements:
 
 -   **[Orion Context Broker (OCB)](https://fiware-orion.readthedocs.io/)**
