@@ -1,14 +1,14 @@
 {
   "name": "fabric-network",
-  "type": "hlfv1.1",
+  "type": "hlfv1.3",
   "channelName": "ledgerchannel",
   "timeout": 5000,
   "cryptoconfigdir": "/usr/app/crypto-config",
   "tls": false,
   "chaincode": {
-    "path": "sss-chaincode-node",
-    "name": "sss-chaincode-node",
-    "version": "1.2",
+    "path": "rpc-chaincode-node",
+    "name": "rpc-chaincode-node",
+    "version": "",
     "lang": "NODE"
   },
   "organizations": [{

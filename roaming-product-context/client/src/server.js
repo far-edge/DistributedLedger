@@ -3,8 +3,8 @@ const express = require('express');
 const CONFIG = require('../resources/config.json');
 const OCB_URL = CONFIG.ocb;
 const app = express();
-const SecureStateSharing = require('./SecureStateSharing');
-const secureStateSharing = new SecureStateSharing();
+const RoamingProductContext = require('./RoamingProductContext');
+const rpc = new RoamingProductContext();
 const RequestHandler = require('./lib/RequestHandler');
 const requestHandler = new RequestHandler();
 const LoggerManager = require('./lib/LoggerManager');
@@ -21,27 +21,6 @@ function onExit() {
 process.on('SIGINT', onExit);
 process.on('exit', onExit);
 
-/**
- * This function launch the SecureStateSharing Companion that updates the current local Orion 
- * with the updates coming from the other Orion in channel
- */
-(async function launchCompanion() {
-    try {
-        const {
-            spawn,
-        } = require('child_process');
-
-        child = spawn('node', ['./src/companion.js'], {
-            detached: true,
-            stdio: [process.stdin, process.stdout, process.stderr],
-        });
-        // child.unref();
-        loggerManager.info('Companion started correctly!');
-    } catch (error) {
-        loggerManager.error(error);
-        onExit();
-    }
-}());
 
 /**
  * 
@@ -59,7 +38,7 @@ async function serveResponse(proxyResData, req, res) {
             }
             if (req.path === '/info') {
                 res.json({
-                    name: 'Secure State Sharing',
+                    name: 'Roaming Product Context',
                     'version': '1.0.0',
                     'author': 'Antonio Scatoloni',
                 });
@@ -70,7 +49,7 @@ async function serveResponse(proxyResData, req, res) {
                 const id = requestHandler.getId(req);
                 const type = requestHandler.getType(req);
                 const method = req.method;
-                const result = await secureStateSharing.executeRequest(id, type, method);
+                const result = await rpc.executeRequest(id, type, method);
                 res.status(200);
                 return requestHandler.createProxyResMessage(proxyResData, result);
             }
@@ -92,7 +71,7 @@ async function processReq(req) {
         const method = 'MIGRATION';
         const id = null;
         const type = null;
-        const result = await secureStateSharing.executeRequest(id, type, method);
+        const result = await rpc.executeRequest(id, type, method);
         loggerManager.info('Migration finished correctly');
     } catch (error) {
         loggerManager.error(error);
@@ -106,7 +85,7 @@ async function saveOrigReq(req) {
     try {
         const id = requestHandler.getId(req);
         const type = requestHandler.getType(req);
-        await secureStateSharing.saveOrigRequest(id, type);
+        await rpc.saveOrigRequest(id, type);
     } catch (error) {
         loggerManager.error(error);
     }
@@ -121,9 +100,9 @@ app.use('/', proxy(OCB_URL, {
             processReq(proxyReqOpts);
         }
         if (proxyReqOpts.headers['Fiware-Service'])
-            secureStateSharing.getOrionHandler().setService(proxyReqOpts.headers['Fiware-Service']);
+            rpc.getOrionHandler().setService(proxyReqOpts.headers['Fiware-Service']);
         if (proxyReqOpts.headers['Fiware-ServicePath'])
-            secureStateSharing.getOrionHandler().setServicePath(proxyReqOpts.headers['Fiware-ServicePath']);
+            rpc.getOrionHandler().setServicePath(proxyReqOpts.headers['Fiware-ServicePath']);
         return proxyReqOpts;
     },
     proxyReqBodyDecorator: function (bodyContent, srcReq) {

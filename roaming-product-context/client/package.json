@@ -1,7 +1,7 @@
 {
-  "name": "secure-state-sharing",
+  "name": "roaming-product-context",
   "version": "1.0.0",
-  "description": "Secure state sharing",
+  "description": "roaming-product-context",
   "main": "src/server.js",
   "test": "test/test.js",
   "scripts": {

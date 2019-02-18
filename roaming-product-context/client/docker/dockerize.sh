@@ -6,7 +6,5 @@ if [ "$1" == "" ]; then
 fi
 rm -rf ../resources
 mv resources ../resources 
-rm -rf ../resources_1
-mv resources_1 ../resources_1
-docker build -t faredge/secure-state-sharing:$1 .
+docker build -t faredge/roaming-product-context:$1 .
 

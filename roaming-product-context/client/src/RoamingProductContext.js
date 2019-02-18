@@ -6,7 +6,7 @@ const orionHandler = new OrionHandler();
 const LoggerManager = require('./lib/LoggerManager');
 const loggerManager = new LoggerManager();
 
-class SecureStateSharing {
+class RoamingProductContext {
    
     constructor() {
         let origEntity = '';
