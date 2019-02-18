@@ -9,6 +9,7 @@ The NGSI Bus acts as a Proxy for the [Orion Context Broker](https://fiware-orion
 * Access to Internet.
 * [Node](https://nodejs.org/en/download/) and pm correctly installed (version 8.x or greater)
 * Docker and Docker Compose correctly installed and working.
+* Access to a HLF v1.3 system and availability of an administrator that will provide the required artifacts (digital certificate and configuration file) for connecting the OCB Proxy to the HLF network.
 * Clone the repository: `git clone https://github.com/far-edge/DistributedLedger.git && cd ngsi-bus`
 
 ### Installation Guide
