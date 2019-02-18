@@ -1,6 +1,6 @@
 # Roaming Product Context 
 
-this **Ledger Service** is actually composed by three separate elements:
+This **Ledger Service** is actually composed by three separate elements:
 
 -   **[Orion Context Broker (OCB)](https://fiware-orion.readthedocs.io/)**
 
