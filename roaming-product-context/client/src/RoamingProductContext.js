@@ -11,8 +11,6 @@ class RoamingProductContext {
     constructor() {
         let origEntity = '';
     }
-
-
     /**
      * public method
      * Entry point for the entire application
