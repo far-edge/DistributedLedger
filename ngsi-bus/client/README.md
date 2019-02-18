@@ -14,8 +14,7 @@ The NGSI Bus acts as a Proxy for the [Orion Context Broker](https://fiware-orion
 
 ### Installation Guide
 #### HLF Administrator
-* Point to the `chaincode` folder.
-*	Fetch the Chaincode starting from this location.
+*   Point to the `chaincode` folder.
 *	Deploy the Chaincode in the **HLF 1.3** Network.
 *	Give users, **the digital certificates and a configuration file** in order to access to the Chaincode and Network Installation.
 #### User
