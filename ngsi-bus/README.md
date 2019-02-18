@@ -3,7 +3,7 @@ NGSI Bus
 
 This Ledger Service is actually composed by three separate elements:
 
--   **Orion Context Broker (OCB)**
+-   **[Orion Context Broker (OCB)](https://fiware-orion.readthedocs.io/)**
 
     This is an open source component from the FIWARE platform. It implements a *context sharing* service that is delivered throught the NGSI API, which is a FIWARE standard for IoT interoperability. This RESTful Web API follows a publish / subscribe pattern and allows multiple clients (IoT devices and applications) to share common context information, which is packaged as an *entity*. However, the API is *not* directly available to clients, as it is hidden behind the OCB Proxy (see next point).
 
