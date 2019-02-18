@@ -1,6 +1,6 @@
 # Roaming Product Context 
 
-The RPC Web Service Provides a local Web API that interacts with both local OCB instance and the global RPC Chaincode. Three service endpoints are available to clients: Release, Acquire and Dispose.
+The **RPC Web Service** Provides a local Web API that interacts with both local OCB instance and the global RPC Chaincode. Three service endpoints are available to clients: Release, Acquire and Dispose.
 
 ## Installation
 ### Prerequisites
