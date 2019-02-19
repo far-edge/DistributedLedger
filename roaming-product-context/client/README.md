@@ -30,7 +30,7 @@ The **RPC Web Service** Provides a local Web API that interacts with both local 
 ## Usage
 <br/>The RPC Service is now available on port `4026` of your environment.
 
-#### The RPC Web Service API
+### The RPC Web Service API
 
 <table><thead><tr class="header"><th>Title</th><th>Release</th></tr></thead><tbody><tr class="odd"><td>Description</td><td><p>This call receives the ID of an NGSI entity that currently exists on the local OCB. If successful, it copies the NGSI entity to the global DL as a sealed object, identified by the ID; at the same time, it deletes it from the local OCB.</p><p>Note: the global DL can either contain <em>no</em> sealed object with the same ID or a matching sealed object which is <em>not</em> in “locked” state (see Acquire); in the latter case, the old sealed object is logically deleted and replaced with the new one.</p></td></tr><tr class="even"><td>URL</td><td>/rpc/v1/entities</td></tr><tr class="odd"><td>Method</td><td>POST</td></tr><tr class="even"><td>URL Params</td><td>id=[string]</td></tr><tr class="odd"><td>Success Response</td><td><p>Code: 201 CREATED (a new sealed object was created)</p><p>Code: 204 NO CONTENT (an existing sealed object was released)</p></td></tr><tr class="even"><td>Error Responses</td><td><p>Code: 400 BAD REQUEST (invalid format of request)</p><p>Code: 409 CONFLICT (any of the following:</p><blockquote><p>no matching entity exists on OCB</p><p>a matching sealed object in “locked” state exists in the DL)</p></blockquote><p>Code: 500 INTERNAL SERVER ERROR (any other error)</p></td></tr></tbody></table>
 
