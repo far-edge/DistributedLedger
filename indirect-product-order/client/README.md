@@ -1,6 +1,27 @@
 # The Product Order Ledger Service
 
+The OrderCommand class is a data transfer object that is structured as follows: 
+```java
+public class OrderCommand { 
 
+String firstName; 
+String lastName; 
+String title; 
+String company; 
+String email; 
+String phone; 
+String internalOrder; 
+String internalCustomer; 
+String order; 
+String customer; 
+Integer color; 
+Integer simulate; 
+Integer giveaway; 
+Integer priority; 
+String type; 
+String operation; 
+} 
+```
 ### Library API 
 
 
