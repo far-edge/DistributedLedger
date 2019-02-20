@@ -11,11 +11,9 @@ var rpcChaincode = class {
 
   async Invoke(stub) {
     logger.info(" Roaming-Product-Context-Invoke ");
-
     let ret = stub.getFunctionAndParameters();
     let fcn = ret.fcn;
     let args = ret.params;
-
     logger.info("getFunctionAndParameters:" + ret);
     logger.info("do this fuction:" + fcn);
     logger.info(" List of args: " + args);
@@ -27,20 +25,20 @@ var rpcChaincode = class {
       return this.acquire(stub, args);
     }
     if (fcn === "dispose") {
-      return this.dispose(stub);
+      return this.dispose(stub, args);
     }
+   
     logger.error("Error...probably wrong name of fuction!!!" + fcn);
-    return shim.error("Error...probably wrong name of fuction!!!" + fcn);
+    return shim.error(Buffer.from("500"));
   }
 
-  generateKey(stub, id) {
+  async generateKey(stub, id) {
     logger.info("####generateKey#### ");
     if (typeof id === "undefined" || id == null) {
-      return shim.error("generateKey ERROR: NGSI's ID is empty or null!!");
+      return shim.error(Buffer.from("500"));
     }
     return stub.createCompositeKey("FE_RPC", [id]);
   }
-
   /* 
   NGSI_ENTITY{
     Id;
@@ -49,7 +47,6 @@ var rpcChaincode = class {
     Payload
   }
   */
-
   /*This call receives the ID of an NGSI entity that currently exists on the local OCB. 
   If successful, it copies the NGSI entity to the global DL as a sealed object, identified by the ID. 
   Note: the global DL can either contain no sealed object with the same ID or a matching sealed 
@@ -59,33 +56,34 @@ var rpcChaincode = class {
     logger.info("--------release-------");
 
     try {
-      let ngsiEntity = JSON.parse(args);
+      let rpcEntity = JSON.parse(args[0]);
       if (
-        typeof ngsiEntity == "undefined" ||
-        ngsiEntity == null ||
-        typeof ngsiEntity != "object"
+        typeof rpcEntity == "undefined" ||
+        rpcEntity == null ||
+        typeof rpcEntity != "object"
       ) {
         logger.error("Entity undefined or null!");
-        return shim.error("Entity undefined or null!");
+        return shim.error(Buffer.from("500"));
       }
-      const entity = ngsiEntity;
-      let key = this.generateKey(stub, entity.Id);
+      const entity = rpcEntity;
+      let key = await this.generateKey(stub, entity.Id);
       try {
         entityBytesResp = await stub.getState(key);
         const entityResp = datatransform.Transform.bufferToObject(
           entityBytesResp
         );
         if (entityResp.Status === "locked") {
-          logger.console.warn("release - WARNING : entity locked!");
+          logger.warn("release - WARNING : entity locked!");
+          return shim.error(Buffer.from("409"));
         } else {
           try {
             entity.Status = "sealed";
             await stub.putState(key, Buffer.from(JSON.stringify(entity)));
             logger.info("release - Entity STORED	with key: " + key);
-            return shim.success(Buffer.from("release - Store succeed"));
+            return shim.success(Buffer.from("204"));
           } catch (e) {
             logger.error("release - ERROR CATCH (putState): " + e);
-            return shim.error(e);
+            return shim.error(Buffer.from("500"));
           }
         }
       } catch (e) {
@@ -96,18 +94,17 @@ var rpcChaincode = class {
           entity.Status = "sealed";
           await stub.putState(key, Buffer.from(JSON.stringify(entity)));
           logger.info("release - Entity STORED	with key: " + key);
-          return shim.success(Buffer.from("release - Store succeed"));
+          return shim.success(Buffer.from(""));
         } catch (e) {
           logger.error("release - ERROR CATCH (putState): " + e);
-          return shim.error(e);
+          return shim.error(Buffer.from("500"));
         }
       }
     } catch (e) {
       logger.error("release - ERROR CATCH (JSON.parse): " + e);
-      return shim.error("Parse error found");
+      return shim.error(Buffer.from("500"));
     }
   }
-
   /*This call receives the ID of a sealed object that currently exists on the global DL. 
   If successful, it copies the sealed object as an NGSI entity with the same ID on the local OCB;
   at the same time, it marks it as “locked” on the global DL.
@@ -115,38 +112,44 @@ var rpcChaincode = class {
   async acquire(stub, args) {
     logger.info("--------acquire-------");
     /*try {
-      let ngsiEntity = JSON.parse(args);
       if (
-        typeof ngsiEntity == "undefined" ||
-        ngsiEntity == null ||
-        typeof ngsiEntity != "object"
+        typeof rpcEntity == 'undefined' ||
+        rpcEntity == null ||
+        typeof rpcEntity != 'object'
       ) {
-        return shim.error("ngsiEntity undefined or null!");
+        return shim.error('rpcEntity undefined or null!');
       }
-      const entity = ngsiEntity;
+      const entity = rpcEntity;
       */
-    let key = this.generateKey(stub, entity.Id);
     try {
-      entityBytesResp = await stub.getState(key);
-      const entityResp = datatransform.Transform.bufferToObject(
-        entityBytesResp
-      );
-      if (entityResp.Status === "locked") {
-        logger.error("acquire - ERROR : Entity locked!");
-        return shim.error("acquire - ERROR : Entity locked!");
-      }
+      let rpcEntity = JSON.parse(args);
+      const entity = rpcEntity;
+      let key = await this.generateKey(stub, entity.Id);
       try {
-        entityResp.Status = "locked";
-        await stub.putState(key, Buffer.from(JSON.stringify(entityResp)));
-        logger.info("acquire - putState complete...entity is returning...");
-        return shim.success(Buffer.from(entityResp));
+        entityBytesResp = await stub.getState(key);
+        const entityResp = datatransform.Transform.bufferToObject(
+          entityBytesResp
+        );
+        if (entityResp.Status === "locked") {
+          logger.error("acquire - ERROR : Entity locked!");
+          return shim.error(Buffer.from("409"));
+        }
+        try {
+          entityResp.Status = "locked";
+          await stub.putState(key, Buffer.from(JSON.stringify(entityResp)));
+          logger.info("acquire - putState complete...entity is returning...");
+          return shim.success(Buffer.from(entityResp));
+        } catch (e) {
+          logger.error("acquire - ERROR CATCH (putState): " + e);
+          return shim.error(Buffer.from("500"));
+        }
       } catch (e) {
-        logger.error("acquire - ERROR CATCH (putState): " + e);
-        return shim.error(e);
+        logger.error("acquire - ERROR CATCH (getState): " + e);
+        return shim.error(Buffer.from("409"));
       }
     } catch (e) {
-      logger.error("acquire - ERROR CATCH (getState): " + e);
-      return shim.error(e);
+      logger.error("acquire - ERROR CATCH (JSON.parse): " + e);
+      return shim.error(Buffer.from("500"));
     }
   }
 
@@ -157,26 +160,26 @@ var rpcChaincode = class {
     logger.info("--------dispose-------");
 
     try {
-      let ngsiEntity = JSON.parse(args);
+      let rpcEntity = JSON.parse(args[0]);
       if (
-        typeof ngsiEntity == "undefined" ||
-        ngsiEntity == null ||
-        typeof ngsiEntity != "object"
+        typeof rpcEntity == "undefined" ||
+        rpcEntity == null ||
+        typeof rpcEntity != "object"
       ) {
-        return shim.error("ngsiEntity undefined or null or not object");
+        return shim.error(Buffer.from("500"));
       }
-      const entity = ngsiEntity;
-      let key = this.generateKey(stub, entity.Id);
+      const entity = rpcEntity;
+      let key = await this.generateKey(stub, entity.Id);
       try {
         promiseDelete = await stub.deleteState(key);
         return shim.success(Buffer.from("dispose - Delete succeed"));
       } catch (e) {
-        logger.info("release - ERROR CATCH (deleteState): " + e);
-        return shim.error(e);
+        logger.info("dispose - ERROR CATCH (deleteState): " + e);
+        return shim.error(Buffer.from("409"));
       }
     } catch (e) {
-      logger.info("release - ERROR CATCH (JSON.parse): " + e);
-      return shim.error("Parse error found");
+      logger.info("dispose - ERROR CATCH (JSON.parse): " + e);
+      return shim.error(Buffer.from("500"));
     }
   }
 };
