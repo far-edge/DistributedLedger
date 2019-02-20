@@ -1,4 +1,4 @@
-# The Product Order Ledger Service Chaincode
+# The Indirect Product Order Ledger Service Chaincode
 
 The operation allowed are as follows:
 
