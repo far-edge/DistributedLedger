@@ -26,11 +26,28 @@ String operation;
 
 
  ```java
-void storeOrderCommand(OrderCommand orderCommand) throws JLedgerClientException;
-Collection<OrderCommand> getAllOrderCommand() throws JLedgerClientException;
-Collection<OrderCommand> getOrderCommandByOrder(String order) throws JLedgerClientException;
-Collection<OrderCommand> getOrderCommandByCustomer(String customer) throws JLedgerClientException;
-OrderCommand getOrderCommand(String order, String customer) throws JLedgerClientException;
+public interface IndirectProductOrder { 
+
+// issue new product order 
+void storeOrderCommand(OrderCommand orderCommand) throws JLedgerClientException; 
+
+// retrieve all existing product orders 
+
+Collection<OrderCommand> getAllOrderCommand() throws JLedgerClientException; 
+
+// retrieve all existing product orders by order id 
+
+Collection<OrderCommand> getOrderCommandByOrder(String order) throws JLedgerClientException; 
+
+// retrieve all existing product orders by customer id 
+
+Collection<OrderCommand> getOrderCommandByCustomer(String customer) throws JLedgerClientException; 
+
+// retrieve existing product order 
+
+OrderCommand getOrderCommand(String order, String customer) throws JLedgerClientException; 
+
+} 
 ```
 ### Usage
 
