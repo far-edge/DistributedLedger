@@ -1,23 +1,26 @@
 # The Product Order Ledger Service Chaincode
 
-```go
-func (t *SmartFactoryWorkflow) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
-	logger.Info("Chaincode Interface - Invoke()\n")
+The operation allowed are as follows:
+**storeOrderCommand**
+This operation implements the insertion of Product Order object.
+- Input: a Product Order object with Customer and Order fields not empty.  
+- Output : Nothing if the operation was successful, otherwise, an error string. 
 
-	function, args := stub.GetFunctionAndParameters()
-	logger.Info("Function name:"+function, " args: "+strings.Join(args, ","))
+**getAllOrderCommand**
+This operation implements the taking of all Product Order object stored in the ledger.
+- Input: Nothing.
+- Output: A list of all PO present in the ledger.
 
-	if function == "storeOrderCommand" {
-		return t.storeOrderCommand(stub, args)
-	} else if function == "getAllOrderCommand" {
-		return t.getAllOrderCommand(stub, args)
-	} else if function == "getOrderCommand" {
-		return t.getOrderCommand(stub, args)
-	} else if function == "getOrderCommandByOrder" {
-		return t.getOrderCommandByQueryResult(stub, args, true)
-	} else if function == "getOrderCommandByCustomer" {
-		return t.getOrderCommandByQueryResult(stub, args, false)
-	}
-	return shim.Error("Invalid invoke function name")
-}
-```
+**getOrderCommand**
+This operation allows to get a PO from the ledger.
+- Input: [ order, customer ] 
+- Output : PO object, if it’s present on the ledger, otherwise, an error string.
+**getOrderCommandByOrder**
+This operation implements the taking of all Product Order with specific Order.
+- Input:  a string corresponding to the Order
+- Output:  a list of PO.
+**getOrderCommandByCustomer**
+This operation implements the taking of all Product Order with specific Customer.
+- Input:  a string corresponding to the Customer
+- Output:  a list of PO.
+
