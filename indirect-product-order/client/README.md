@@ -1,4 +1,4 @@
-# The Product Order Ledger Service
+# The Indirect Product Order Ledger Service
 
 The OrderCommand class is a data transfer object that is structured as follows: 
 ```java
