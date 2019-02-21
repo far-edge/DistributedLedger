@@ -1,0 +1,7 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "func-names": ["error", "never"],
+    "jsx-a11y/anchor-has-content": "off"
+  }
+}

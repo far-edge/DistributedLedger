@@ -1,0 +1,9 @@
+{
+    "port": 4026,
+    "ocb": "http://localhost:2026",
+    "service": "",
+    "servicepath": "",
+    "development": true,
+    "path_exclude": "op,subscriptions",
+    "logLevel": "debug"
+}

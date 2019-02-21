@@ -5,3 +5,4 @@ companion/node_modules/*
 *-lock.json
 doc/*
 .env
+docker/resources/config-fabric-network.json

@@ -25,8 +25,6 @@ The **RPC Web Service** Provides a local Web API that interacts with both local 
     `npm run docker`.
 *	Launch the system with the command: `./start.sh`. 
 
-
-
 ## Usage
 <br/>The RPC Service is now available on port `4026` of your environment.
 

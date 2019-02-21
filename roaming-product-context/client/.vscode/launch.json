@@ -4,6 +4,7 @@
     // Per ulteriori informazioni, visitare: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         
         {
             "type": "node",
@@ -23,7 +24,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Secure State Sharing",
+            "name": "Roaming Product Context",
             "program": "${workspaceFolder}/src/server.js"
         }
     ]
