@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 const express = require('express');
 const _ = require('underscore');
 const CONFIG = require('../resources/config.json');
@@ -15,6 +16,7 @@ function onExit() {
   process.exit(0);
 }
 
+/*
 function errorHandler(err, res, next) {
   if (res.headersSent) {
     return next(err);
@@ -22,42 +24,64 @@ function errorHandler(err, res, next) {
   res.status(500);
   res.json(err.message);
   return null;
-}
+} */
 
 process.on('SIGINT', onExit);
 process.on('exit', onExit);
 
-app.use(errorHandler);
-
-
-app.post('/rpc/v1/entities/:id', (req, res) => {
-  const status = rpc.validateRequest(req);
-  if (!_.isEmpty(status)) {
-    res.sendStatus(status.status);
-  }
-  res.sendStatus(rpc.release(req));
+app.get('/', (req, res) => {
+  res.send('RPC Server...');
 });
 
-app.put('/rpc/v1/entities/:id', (req, res) => {
-  const status = rpc.validateRequest(req);
-  if (!_.isEmpty(status)) {
-    res.sendStatus(status.status);
-  }
-  res.sendStatus(rpc.acquire(req));
+app.route('/rpc/v1/entities/:id')
+  .post((req, res) => {
+    const status = rpc.validateRequest(req);
+    if (!_.isEmpty(status)) {
+      res.sendStatus(status.status);
+    }
+    const result = rpc.release(req);
+    result.then((data) => {
+      res.sendStatus(data.status);
+    })
+      .catch((err) => {
+        res.send(err);
+      });
+  })
+  .put((req, res) => {
+    const status = rpc.validateRequest(req);
+    if (!_.isEmpty(status)) {
+      res.sendStatus(status.status);
+    }
+    const result = rpc.acquire(req);
+    result.then((data) => {
+      res.sendStatus(data.status);
+    })
+      .catch((err) => {
+        res.send(err);
+      });
+  })
+  .delete((req, res) => {
+    const status = rpc.validateRequest(req);
+    if (!_.isEmpty(status)) {
+      res.sendStatus(status.status);
+    }
+    const result = rpc.dispose(req);
+    result.then((data) => {
+      res.sendStatus(data.status);
+    })
+      .catch((err) => {
+        res.send(err);
+      });
+  });
+
+
+app.use((req, res) => {
+  res.status(404).send("Sorry, that route doesn't exist.");
 });
 
-app.delete('/rpc/v1/entities/:id', (req, res) => {
-  const status = rpc.validateRequest(req);
-  if (!_.isEmpty(status)) {
-    res.sendStatus(status.status);
-  }
-  res.sendStatus(rpc.dispose(req));
+app.listen(CONFIG.port, () => {
+  loggerManager.logger.info(`Server listening at port ${CONFIG.port}`);
 });
-
-app.get('');
-
-app.listen(CONFIG.port, () => loggerManager.logger.info(`RPC Service listening on port ${CONFIG.port}!`));
-
 
 process.on('uncaughtException', (er) => {
   loggerManager.logger.error(er.stack);

@@ -3,7 +3,7 @@
   "type": "hlfv1.3",
   "channelName": "ledgerchannel",
   "timeout": 5000,
-  "cryptoconfigdir": "/Users/ascatox/crypto-config",
+  "cryptoconfigdir": "/home/claudio/Scrivania/crypto-config",
   "tls": false,
   "chaincode": {
     "path": "rpc-chaincode-node",

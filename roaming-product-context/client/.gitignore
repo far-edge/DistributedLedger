@@ -6,3 +6,4 @@ companion/node_modules/*
 doc/*
 .env
 docker/resources/config-fabric-network.json
+docker/resources/crypto-config/*

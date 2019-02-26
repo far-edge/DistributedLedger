@@ -26,8 +26,8 @@ services:
      ports: 
       - "3026:3026"
      volumes:
-      - ~/resources:/usr/app/resources
-      - ~/resources/crypto-config:/usr/app/crypto-config
+      - ./resources:/usr/app/resources
+      - ./resources/crypto-config:/usr/app/crypto-config
    #   external_links:
    #    - ca.example.com
    #    - orderer.example.com

@@ -45,6 +45,14 @@ class RoamingProductContext {
     ]);
   }
 
+  static clearFieldStatus(entity) {
+    const entityObj = entity;
+    if (entityObj.rpcStatus) {
+      delete entityObj.rpcStatus;
+    }
+    return entityObj;
+  }
+
   // eslint-disable-next-line class-methods-use-this
   validateRequest(req) {
     // Validation of request
@@ -60,19 +68,22 @@ class RoamingProductContext {
     return null;
   }
 
-  acquire(req) {
+  async acquire(req) {
     try {
       // Presence in OCB
       const {
         id,
       } = req.params;
-      const sealedEntity = this.blockchainHandler.executeOperation(id,
-        this.blockchainHandler.chaincodeOperation.ACQUIRE);
+      const sealedEntity = await this.blockchainHandler.executeOperation(id,
+        this.blockchainHandler.chaincodeOperation.ACQUIRE, true);
       if (_.isEmpty(sealedEntity)) {
         return this.reqStates.NO_ENTIY_EXISTS;
       }
       try {
-        this.orionHandler.executeOperation(sealedEntity, req.method);
+        const sealedEntityObj = JSON.parse(sealedEntity);
+        await this.orionHandler.executeOperation(RoamingProductContext
+          .clearFieldStatus(sealedEntityObj),
+        req.method);
         return this.reqStates.SUCCESS_NO_CONTENT;
       } catch (error) {
         this.loggerManager.logger.error(`Error coming from Blockchain: ${error}`);
@@ -84,14 +95,14 @@ class RoamingProductContext {
     }
   }
 
-  dispose(req) {
+  async dispose(req) {
     try {
       const {
         id,
       } = req.params;
       try {
-        this.blockchainHandler.executeOperation(id,
-          this.blockchainHandler.chaincodeOperation.DISPOSE);
+        await this.blockchainHandler.executeOperation(id,
+          this.blockchainHandler.chaincodeOperation.DISPOSE, true);
         return this.reqStates.SUCCESS_NO_CONTENT;
       } catch (error) {
         this.loggerManager.logger.error(`Error coming from Blockchain: ${error}`);
@@ -104,23 +115,26 @@ class RoamingProductContext {
   }
 
 
-  release(req) {
+  async release(req) {
     try {
       const {
         id,
       } = req.params;
-      const ocbEntity = this.orionHandler.getEntity(id, this.TYPE);
+      const ocbEntity = await this.orionHandler.getEntity(id, this.TYPE);
       if (_.isEmpty(ocbEntity)) {
         return this.reqStates.NO_ENTIY_EXISTS;
       }
       try {
-        const status = this.blockchainHandler.executeOperation(ocbEntity,
-          this.blockchainHandler.chaincodeOperation.RELEASE);
-
-        if (this.reqStatesMap.get(status)) {
-          this.orionHandler.deleteEntity(id, this.TYPE);
+        const entityResponseCode = await this.blockchainHandler.executeOperation(ocbEntity,
+          this.blockchainHandler.chaincodeOperation.RELEASE, false);
+        const {
+          entity,
+          responseCode,
+        } = JSON.parse(entityResponseCode);
+        if (this.reqStatesMap.get(entity)) {
+          await this.orionHandler.deleteEntity(entity.id, entity.type);
         }
-        return this.reqStatesMap.get(status);
+        return this.reqStatesMap.get(responseCode);
       } catch (error) {
         this.loggerManager.logger.error(`Error coming from Blockchain: ${error}`);
         return this.reqStatesMap.get(error);
@@ -131,4 +145,6 @@ class RoamingProductContext {
     }
   }
 }
+
+
 module.exports = RoamingProductContext;

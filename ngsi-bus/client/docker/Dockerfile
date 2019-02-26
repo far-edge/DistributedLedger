@@ -1,8 +1,8 @@
 FROM node:8
 
 # Create app directory
-RUN mkdir -p /usr/app/src
-COPY ./app /usr/app/src
+RUN mkdir -p /usr/app/
+COPY ./app /usr/app/
 WORKDIR /usr/app/
 
 # Install app dependencies

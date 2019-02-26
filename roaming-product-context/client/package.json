@@ -9,7 +9,7 @@
     "start-dev": "nodemon src/server.js",
     "test": "node_modules/.bin/mocha -w",
     "doc": "nodedoc src",
-    "docker": "rm -rf ./docker/app && chmod +x ./docker/*.sh && npm install && cd docker && mkdir app && cp -r ../src/* app && cp ../package.json app && ./dockerize.sh 1.0.0"
+    "docker": "rm -rf ./docker/app && chmod +x ./docker/*.sh && npm install && cd docker && mkdir app && cd app && mkdir src && cd .. && cp -r ../src/* app/src/ && cp ../package.json app && ./dockerize.sh 1.0.0"
   },
   "author": "Antonio Scatoloni",
   "license": "ISC",
@@ -20,7 +20,7 @@
     "ngsijs": "^1.1.1",
     "node-ledger-client": "^1.1.14",
     "winston": "^3.1.0",
-    "underscore":"^1.9.1"
+    "underscore": "^1.9.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",

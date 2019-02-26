@@ -1,8 +1,12 @@
+// eslint-disable-next-line import/no-unresolved
 const nodeLedgerClient = require('node-ledger-client');
 const config = require('../../resources/config-fabric-network.json');
+const LoggerManager = require('./LoggerManager');
 
 class BlockchainHandler {
   constructor() {
+    this.loggerManager = new LoggerManager();
+
     this.chaincodeOperation = Object.freeze({
       ACQUIRE: {
         name: 'acquire',
@@ -20,16 +24,22 @@ class BlockchainHandler {
     ledger();
   }
 
-  async executeOperation(asset, chaincodeOperation) {
+  async executeOperation(asset, chaincodeOperation, isOnlyID) {
     let result = null;
     try {
-      if (asset) {
-        const args = [JSON.stringify(asset)];
-        result = await this.ledgerClient.doInvoke(chaincodeOperation.name, args);
+      if (!isOnlyID) {
+        if (asset) {
+          const args = [JSON.stringify(asset)];
+          result = await this.ledgerClient.doInvoke(chaincodeOperation.name, args);
+        } else {
+          throw new Error('Entity could not be empty or null');
+        }
       } else {
-        throw new Error('Entity could not be empty or null');
+        const args = [asset];
+        result = await this.ledgerClient.doInvoke(chaincodeOperation.name, args);
       }
     } catch (error) {
+      this.loggerManager.logger.error(error);
       throw new Error(error);
     }
     return result;

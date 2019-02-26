@@ -9,7 +9,7 @@
     "start-dev": "nodemon src/server.js",
     "test": "node_modules/.bin/mocha -w",
     "doc": "nodedoc src",
-    "docker": "rm -rf ./docker/app && chmod +x ./docker/*.sh && npm install && cd docker && mkdir app && cp -r ../src/* app && cp ../package.json app && ./dockerize.sh 1.0.0"
+    "docker": "rm -rf ./docker/app && chmod +x ./docker/*.sh && npm install && cd docker && mkdir app && cd app && mkdir src && cd .. && cp -r ../src/* app/src/ && cp ../package.json app && ./dockerize.sh 1.0.0"
   },
   "author": "Antonio Scatoloni",
   "license": "ISC",

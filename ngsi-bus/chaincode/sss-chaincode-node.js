@@ -46,41 +46,13 @@ var Chaincode = class {
     if (fcn === "deleteEntity") {
       return this.deleteEntity(stub, args);
     }
-    if ( fcn === "migrate") {
-      return this.migrate(stub);
-    }
-    /*  if (fcn === "putPrivateEntity") {
-      return this.putPrivateEntity(stub, args);
-    }
-    if (fcn === "getPrivateEntity") {
-      return this.getPrivateEntity(stub, args);
-    } */
+
     logger.error("Error...probably wrong name of fuction!!!" + fcn);
     return shim.error("Error...probably wrong name of fuction!!!" + fcn);
   }
-
-  async migrate(stub){
-    logger.debug("___migrate___");
-
-    let entityGetbytes = null;
-    let arg = new Array();
-    arg = [];
-    try {
-      entityGetbytes = await stub.getStateByPartialCompositeKey("FE_SSS", arg);
-      if (!entityGetbytes) {
-        return shim.error(" getState() Error: retrive empty data!!!");
-      }
-      const strings = await  datatransform.Transform.iteratorToList(entityGetbytes);
-      logger.debug("getEntity extract: " + strings);
-      //stub.setEvent("FE_SSS_MIGRATE", Buffer.from(stringGet));
-      return shim.success(Buffer.from(JSON.stringify(strings)));
-    } catch (e) {
-      logger.error("migrate() - ERROR CATCH: " + e);
-      return shim.error("migrate() - ERROR CATCH!!" + e);
-    }
-  }
-
-  async deleteEntity(stub, args) {
+  
+  
+async deleteEntity(stub, args) {
     logger.debug("___deleteEntity___");
     let promiseDelete = null;
     if (args.length != 2) {
@@ -94,7 +66,6 @@ var Chaincode = class {
       if (!promiseDelete) {
         return shim.error("stub.deleteState(): no entity with key: " + keySSS);
       }
-
       //let eventString = args[0] + args[1];
       let eventKey = {
         id:args[0],
@@ -142,19 +113,6 @@ var Chaincode = class {
             entityGetbytes
           );
           let entityGetFlat = JSON.parse(entityString);
-          //let entityInputFlat = flatten(entityInput);
-          //let entityGetFlat = flatten(entityGet);
-          /*
-          for (var field in entityInput) {
-            if (
-              entityInput.hasOwnProperty(field) !=
-              entityGetFlat.hasOwnProperty(field)
-            ) {
-              return shim.error("updateEntity Error: Incorrect structure!!!");
-            }
-          }
-          logger.info("updateEntity: Correct structure!!");
-          */
           logger.info(" Start updating the entity...");
           await stub.putState(keySSS, Buffer.from(JSON.stringify(entityInput)));
           logger.debug("updateEntity - Store successfull!!!");
@@ -200,10 +158,6 @@ var Chaincode = class {
       }
       const stringGet = datatransform.Transform.bufferToString(entityGetbytes);
       logger.debug("getEntity extract: " + stringGet);
-      //let payload = JSON.parse(stringGet);
-
-      // stub.setEvent("FE_SSS_GET_ENTITY", Buffer.from(stringGet));
-
       return shim.success(Buffer.from(stringGet));
     } catch (e) {
       logger.error("getEntity - ERROR CATCH: " + e);
@@ -269,78 +223,3 @@ var Chaincode = class {
 };
 
 shim.start(new Chaincode());
-
-//PRIVATE DATA
-
-/* async putPrivateEntity(stub, args) {
-    logger.debug("___putPrivateEntity___");
-    if (args.length == 1) {
-      try {
-        let entityContainer = JSON.parse(args[0]);
-        if (
-          typeof entityContainer == "undefined" ||
-          entityContainer == null ||
-          typeof entityContainer != "object"
-        ) {
-          return shim.error("entityContainer undefined or null or not object");
-        }
-        //const entity = entityContainer;
-
-        try {
-          var keySSS = stub.createCompositeKey("private", [
-            entityContainer.id,
-            entityContainer.type
-          ]);
-
-          await stub.putPrivateData({
-              privateCollection: "entityCollection"
-            },
-            keySSS,
-            Buffer.from(JSON.stringify(entityContainer))
-          );
-          logger.debug("putPrivateEntity - Store successfull!!");
-          return shim.success(
-            Buffer.from("putPrivateEntity - Store successfull!!!")
-          );
-        } catch (e) {
-          logger.error(
-            "putPrivateEntity - ERROR CATCH (stub.putPrivateEntity()): " + e
-          );
-          return shim.error(e);
-        }
-      } catch (e) {
-        logger.error("putPrivateEntity - ERROR CATCH (JSON.parse()): " + e);
-        return shim.error("Parse error found");
-      }
-    } else {
-      return shim.error("putPrivateEntity ERROR: wrong argument!!");
-    }
-  }
-
-  async getPrivateEntity(stub, args) {
-    logger.debug("___getPrivateEntity___");
-    let entityGetbytes = null;
-    if (args.length != 2) {
-      return shim.error("Number of argument is wrong, expected two!!");
-    }
-    let keySSS = stub.createCompositeKey("private", [args[0], args[1]]);
-
-    try {
-      entityGetbytes = await stub.getPrivateData({
-          privateCollection: "carCollection"
-        },
-        keySSS
-      );
-      if (!entityGetbytes) {
-        return shim.error(" privateEntity with key not found!!!");
-      }
-      const stringGet = datatransform.Transform.bufferToString(entityGetbytes);
-      //let payload = JSON.parse(stringGet);
-      return shim.success(Buffer.from(stringGet));
-    } catch (e) {
-      logger.error("getPrivateEntity - ERROR CATCH: " + e);
-      return shim.error(
-        "getPrivateEntity - Failed to get state with key: " + keySSS
-      );
-    }
-  } */
