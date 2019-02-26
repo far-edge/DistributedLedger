@@ -15,8 +15,7 @@ services:
     extends:
       file:  base/docker-compose-base.yaml
       service: peer0.org1.example.com
-    environment:
-     - peer-chaincodedev=true
+    
     networks:
       - byfn
 
@@ -41,11 +40,12 @@ services:
     extends:
       file:  base/docker-compose-base.yaml
       service: peer3.org1.example.com
+    #command: peer node start --peer-chaincodedev=true
     networks:
       - byfn
 
   ca.example.com:
-    image: hyperledger/fabric-ca:x86_64-1.1.0
+    image: hyperledger/fabric-ca:1.2.0
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.example.com
@@ -56,7 +56,8 @@ services:
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
       - ./ca/data:/etc/hyperledger/fabric-ca-server
-      - ./ca/msp:/msp
+      - ./crypto-config/peerOrganizations/org1.example.com/msp/:/etc/hyperledger/fabric-ca-server/crypto-config/peerOrganizations/org1.example.com/msp
+   #  - ./ca/msp:/msp
       - ./crypto-config/peerOrganizations/org1.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca.example.com
     networks:
@@ -64,7 +65,7 @@ services:
   
   #TODO Kafka
   kafka0:
-    image: hyperledger/fabric-kafka:x86_64-0.4.7
+    image: hyperledger/fabric-kafka:0.4.10
     restart: always
     tty: true
     container_name: kafka0
@@ -89,7 +90,7 @@ services:
       - byfn
 
   kafka1:
-    image: hyperledger/fabric-kafka:x86_64-0.4.7
+    image: hyperledger/fabric-kafka:0.4.10
     restart: always
     tty: true
     container_name: kafka1
@@ -162,7 +163,7 @@ services:
   #     - byfn
 
   zookeeper0:
-    image: hyperledger/fabric-zookeeper:x86_64-0.4.7
+    image: hyperledger/fabric-zookeeper:0.4.10
     restart: always
     tty: true
     container_name: zookeeper0
@@ -229,7 +230,7 @@ services:
 
   cli:
     container_name: cli
-    image: hyperledger/fabric-tools:x86_64-1.1.0
+    image: hyperledger/fabric-tools:1.2.0
     tty: true
     environment:
       - GOPATH=/opt/gopath
@@ -247,7 +248,8 @@ services:
     command: /bin/bash -c './scripts/script_reduced.sh ${CHANNEL_NAME} ${DELAY}; sleep infinity' #use $TIMEOUT
     volumes:
         - /var/run/:/host/var/run/
-        - ./chaincode/smartfactory/src/github.com/:/opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go
+       # - ./chaincode/smartfactory/src/github.com/:/opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go
+        - ./chaincode/go:/opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go
         - ./chaincode:/opt/gopath/src/github.com/hyperledger/fabric/chaincode
         - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
         - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
@@ -307,7 +309,7 @@ services:
       - byfn
   
   composer: #composer service
-    image: hyperledger/composer-playground:0.19.0-20180323121202
+    image: hyperledger/composer-playground:latest
     container_name: composer-playground
     ports:
       - "8080:8080"

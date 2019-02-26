@@ -12,7 +12,7 @@ services:
   
   couchdb0:
     container_name: couchdb0
-    image: hyperledger/fabric-couchdb:x86_64-1.0.6
+    image: hyperledger/fabric-couchdb:0.4.10
     # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
     # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
     environment:
@@ -43,7 +43,7 @@ services:
 
   couchdb1:
     container_name: couchdb1
-    image: hyperledger/fabric-couchdb:x86_64-1.0.6
+    image: hyperledger/fabric-couchdb:0.4.10
     # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
     # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
     environment:
@@ -74,7 +74,7 @@ services:
 
   couchdb2:
       container_name: couchdb2
-      image: hyperledger/fabric-couchdb:x86_64-1.0.6
+      image: hyperledger/fabric-couchdb:0.4.10
       # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
       # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
       environment:
@@ -103,7 +103,7 @@ services:
 
   couchdb3:
       container_name: couchdb3
-      image: hyperledger/fabric-couchdb:x86_64-1.0.6
+      image: hyperledger/fabric-couchdb:0.4.10
       # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
       # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
       environment:

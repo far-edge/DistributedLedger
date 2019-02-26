@@ -7,7 +7,7 @@ version: '2'
 services:
   cli:
     container_name: cli
-    image: hyperledger/fabric-tools:x86_64-1.1.0
+    image: hyperledger/fabric-tools:1.2.0
     tty: true
     environment:
       - GOPATH=/opt/gopath
@@ -25,7 +25,8 @@ services:
     command: /bin/bash -c './scripts/script.sh ${CHANNEL_NAME} ${DELAY}; sleep infinity' #use $TIMEOUT
     volumes:
         - /var/run/:/host/var/run/
-        - ./chaincode/smartfactory/src/github.com/:/opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go
+        #- ./chaincode/smartfactory/src/github.com/:/opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go
+        - ./chaincode/go:/opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go
         - ./chaincode:/opt/gopath/src/github.com/hyperledger/fabric/chaincode
         - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
         - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/

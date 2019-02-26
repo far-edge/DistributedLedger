@@ -124,7 +124,7 @@ function removeUnwantedImages() {
 function networkUp () {
   # generate artifacts if they don't exist
   #if [ ! -d "crypto-config" ]; then
-  if [ "$MODE" == "reset" ]; then
+   if [ ! -d "crypto-config" ]; then
     generateCerts
     replacePrivateKey
     generateChannelArtifacts
@@ -159,13 +159,11 @@ function networkDown () {
     #Cleanup images
     removeUnwantedImages
     # remove orderer block and other channel configuration transactions and certs
-    rm -rf channel-artifacts/*.block channel-artifacts/*.tx crypto-config
+    # rm -rf channel-artifacts/*.block channel-artifacts/*.tx crypto-config
     # remove the docker-compose yaml file that was customized to the example
-    rm -f docker-compose-e2e.yaml
+    # rm -f docker-compose-e2e.yaml
     # remove couchDB data folder
     rm -rf ./data/* 
-
-    
   fi
 }
 
