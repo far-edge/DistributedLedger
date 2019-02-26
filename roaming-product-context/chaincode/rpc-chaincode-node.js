@@ -1,48 +1,48 @@
-const shim = require("fabric-shim");
-const datatransform = require("./utils/datatransform");
-var logger = shim.newLogger("Roaming-Product-Context-Logger");
-logger.level = "debug";
+const shim = require('fabric-shim');
+const datatransform = require('./utils/datatransform');
+var logger = shim.newLogger('Roaming-Product-Context-Logger');
+logger.level = 'debug';
 
 var rpcChaincode = class {
   async Init(stub) {
-    logger.info(" Roaming-Product-Context-Init ");
-    return shim.success(Buffer.from("Init - OK!"));
+    logger.info(' Roaming-Product-Context-Init ');
+    return shim.success(Buffer.from('Init - OK!'));
   }
 
   async Invoke(stub) {
-    logger.info(" Roaming-Product-Context-Invoke ");
+    logger.info(' Roaming-Product-Context-Invoke ');
     let ret = stub.getFunctionAndParameters();
     let fcn = ret.fcn;
     let args = ret.params;
-    logger.info("getFunctionAndParameters:" + ret);
-    logger.info("do this fuction:" + fcn);
-    logger.info(" List of args: " + args);
+    logger.info('getFunctionAndParameters:' + ret);
+    logger.info('do this fuction:' + fcn);
+    logger.info(' List of args: ' + args);
 
-    if (fcn === "release") {
+    if (fcn === 'release') {
       return this.release(stub, args);
     }
-    if (fcn === "acquire") {
+    if (fcn === 'acquire') {
       return this.acquire(stub, args);
     }
-    if (fcn === "dispose") {
+    if (fcn === 'dispose') {
       return this.dispose(stub, args);
     }
-    logger.error("Error...probably wrong name of fuction!!!" + fcn);
-    return shim.error(Buffer.from("500"));
+    logger.error('Error...probably wrong name of fuction!!!' + fcn);
+    return shim.error(Buffer.from('500'));
   }
 
   async generateKey(stub, id) {
-    logger.info("####generateKey#### ");
-    if (typeof id === "undefined" || id == null) {
-      return shim.error(Buffer.from("500"));
+    logger.info('####generateKey#### ');
+    if (typeof id === 'undefined' || id == null) {
+      return shim.error(Buffer.from('500'));
     }
-    return stub.createCompositeKey("FE_RPC", [id]);
+    return stub.createCompositeKey('FE_RPC', [id]);
   }
   /* 
   NGSI_ENTITY{
     Id;
     Type;
-    Status;
+    rpcStatus;
     Payload
   }
   */
@@ -52,64 +52,64 @@ var rpcChaincode = class {
   object which is not in “locked” state (see Acquire); in the latter case, the old sealed object 
   is logically deleted and replaced with the new one.*/
   async release(stub, args) {
-    logger.info("--------release-------");
+    logger.info('--------release-------');
 
     try {
       let rpcEntity = JSON.parse(args[0]);
       if (
-        typeof rpcEntity == "undefined" ||
+        typeof rpcEntity == 'undefined' ||
         rpcEntity == null ||
-        typeof rpcEntity != "object"
+        typeof rpcEntity != 'object'
       ) {
-        logger.error("Entity undefined or null!");
-        return shim.error(Buffer.from("500"));
+        logger.error('Entity undefined or null!');
+        return shim.error(Buffer.from('500'));
       }
       const entity = rpcEntity;
-      let key = await this.generateKey(stub, entity.id);
+      const key = await this.generateKey(stub, entity.id);
       try {
-        entityBytesResp = await stub.getState(key);
+        const entityBytesResp = await stub.getState(key);
         const entityResp = datatransform.Transform.bufferToObject(
           entityBytesResp
         );
-        if (entityResp.status === "locked") {
-          logger.error("release - WARNING : entity locked!");
-          return shim.error(Buffer.from("409"));
+        if (entityResp.rpcStatus === 'locked') {
+          logger.error('release - WARNING : entity locked!');
+          return shim.error(Buffer.from('409'));
         } else {
           try {
-            entity.status = "sealed";
+            entity.rpcStatus = 'sealed';
             await stub.putState(key, Buffer.from(JSON.stringify(entity)));
             let entityResp = {
               entity: entity,
-              responseCode: "204"
+              responseCode: '204'
             };
-            logger.info("release - Entity STORED	with key: " + key);
+            logger.info('release - Entity STORED	with key: ' + key);
             return shim.success(Buffer.from(JSON.stringify(entityResp)));
           } catch (e) {
-            logger.error("release - ERROR CATCH (putState): " + e);
-            return shim.error(Buffer.from("500"));
+            logger.error('release - ERROR CATCH (putState): ' + e);
+            return shim.error(Buffer.from('500'));
           }
         }
       } catch (e) {
         logger.info(
-          "release - No Entity with key: " + key + "...start putState..."
+          'release - No Entity with key: ' + key + '...start putState...'
         );
         try {
-          entity.status = 'sealed';
+          entity.rpcStatus = 'sealed';
           await stub.putState(key, Buffer.from(JSON.stringify(entity)));
           let entityResp = {
             entity: entity,
-            responseCode: "200"
+            responseCode: '201'
           };
-          logger.info("release - Entity STORED	with key: " + key);
+          logger.info('release - Entity STORED	with key: ' + key);
           return shim.success(Buffer.from(JSON.stringify(entityResp)));
         } catch (e) {
-          logger.error("release - ERROR CATCH (putState): " + e);
-          return shim.error(Buffer.from("500"));
+          logger.error('release - ERROR CATCH (putState): ' + e);
+          return shim.error(Buffer.from('500'));
         }
       }
     } catch (e) {
-      logger.error("release - ERROR CATCH (JSON.parse): " + e);
-      return shim.error(Buffer.from("500"));
+      logger.error('release - ERROR CATCH (JSON.parse): ' + e);
+      return shim.error(Buffer.from('500'));
     }
   }
   /*This call receives the ID of a sealed object that currently exists on the global DL. 
@@ -117,47 +117,44 @@ var rpcChaincode = class {
   at the same time, it marks it as “locked” on the global DL.
   Note: the sealed object on the global DL cannot be already in “locked” state.*/
   async acquire(stub, args) {
-    logger.info("--------acquire-------");
+    logger.info('--------acquire-------');
     if (args[0] == null | args[0] === 'undefined') {
       logger.error('acquire - ERROR entity ID empty or null!');
       return shim.error(Buffer.from('500'));
     }
-    try {
       let id = args[0];
-      let key = await this.generateKey(stub, id);
+      const key = await this.generateKey(stub, id);
       try {
-        entityBytesResp = await stub.getState(key);
+        const entityBytesResp = await stub.getState(key);
         const entityResp = datatransform.Transform.bufferToObject(
           entityBytesResp
         );
-        if (entityResp.status === "locked") {
-          logger.error("acquire - ERROR : Entity locked!");
-          return shim.error(Buffer.from("409"));
+        if (entityResp.rpcStatus === 'locked') {
+          logger.error('acquire - ERROR : Entity locked!');
+          return shim.error(Buffer.from('409'));
         }
         try {
-          entityResp.status = "locked";
-          await stub.putState(key, Buffer.from(JSON.stringify(entityResp)));
-          logger.info("acquire - putState complete...entity is returning...");
-          return shim.success(Buffer.from(entityResp));
+          entityResp.rpcStatus = 'locked';
+          logger.info("    KEY    :   "  +key);
+          await stub.putState(key.toString(), Buffer.from(JSON.stringify(entityResp)));
+          logger.info('acquire - putState complete...');
+          logger.info('...      Entity  -->    ' + JSON.stringify(entityResp));
+          return shim.success(Buffer.from(JSON.stringify(entityResp)));
         } catch (e) {
-          logger.error("acquire - ERROR CATCH (putState): " + e);
-          return shim.error(Buffer.from("500"));
+          logger.error('acquire - ERROR CATCH (putState): ' + e);
+          return shim.error(Buffer.from('500'));
         }
       } catch (e) {
-        logger.error("acquire - ERROR CATCH (getState): " + e);
-        return shim.error(Buffer.from("409"));
+        logger.error('acquire - ERROR CATCH (getState): ' + e);
+        return shim.error(Buffer.from('409'));
       }
-    } catch (e) {
-      logger.error("acquire - ERROR CATCH (JSON.parse): " + e);
-      return shim.error(Buffer.from("500"));
-    }
   }
 
   /*This call receives the ID of a sealed object that currently exists on the global DL. 
   If successful, it performs a logical deletion (i.e., the sealed object disappears 
   from the global DL to all practical effects, but is maintained in the history log).*/
   async dispose(stub, args) {
-    logger.info("--------dispose-------");
+    logger.info('--------dispose-------');
 
     if (args[0] == null | args[0] === 'undefined') {
       logger.error('dispose - ERROR entity ID empty or null!');
@@ -165,18 +162,18 @@ var rpcChaincode = class {
     }
     try {
       let id = args[0];
-      let key = await this.generateKey(stub, id);
+      const key = await this.generateKey(stub, id);
       try {
-        promiseDelete = await stub.deleteState(key);
-        logger.info("dispose - deleteState complete!")
-        return shim.success(Buffer.from("204"));
+        const promiseDelete = await stub.deleteState(key);
+        logger.info('dispose - deleteState complete!');
+        return shim.success(Buffer.from('204'));
       } catch (e) {
-        logger.info("dispose - ERROR CATCH (deleteState): " + e);
-        return shim.error(Buffer.from("409"));
+        logger.info('dispose - ERROR CATCH (deleteState): ' + e);
+        return shim.error(Buffer.from('409'));
       }
     } catch (e) {
-      logger.info("dispose - ERROR CATCH (generateKey): " + e);
-      return shim.error(Buffer.from("500"));
+      logger.info('dispose - ERROR CATCH (generateKey): ' + e);
+      return shim.error(Buffer.from('500'));
     }
   }
 };
