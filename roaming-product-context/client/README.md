@@ -27,6 +27,7 @@ The **RPC Web Service** Provides a local Web API that interacts with both local 
 
 ## Usage
 <br/>The RPC Service is now available on port `4026` of your environment.
+<br/>[The Orion Context Broker API](http://telefonicaid.github.io/fiware-orion/api/v2/stable/) is now available on port `2026` of your environment.
 
 ### The RPC Web Service API
 
